@@ -1,0 +1,388 @@
+:root {
+    /* Lafaom Mao Brand Colors */
+    --color-primary-light: #E85A7A;
+    /* Rose clair du logo */
+    --color-primary: #D14B6B;
+    /* Rose principal */
+    --color-primary-dark: #B73E5C;
+    /* Rose foncé */
+    --color-secondary: #8B2635;
+    /* Bordeaux du logo */
+    --color-secondary-dark: #6B1D2A;
+    /* Bordeaux foncé */
+
+    /* Neutral Colors */
+    --color-white: #FFFFFF;
+    --color-gray-100: #F8F9FA;
+    --color-gray-200: #E9ECEF;
+    --color-gray-300: #DEE2E6;
+    --color-gray-400: #CED4DA;
+    --color-gray-500: #6C757D;
+    --color-gray-600: #495057;
+    --color-gray-700: #343A40;
+    --color-gray-800: #212529;
+    --color-gray-900: #1A1D20;
+
+    /* Shadows */
+    --shadow-small: rgba(139, 38, 53, 0.1) 0px 1px 3px 0px,
+        rgba(139, 38, 53, 0.06) 0px 1px 2px 0px;
+    --shadow-medium: rgba(139, 38, 53, 0.1) 0px 4px 6px -1px,
+        rgba(139, 38, 53, 0.06) 0px 2px 4px -1px;
+    --shadow-large: rgba(139, 38, 53, 0.1) 0px 10px 15px -3px,
+        rgba(139, 38, 53, 0.05) 0px 4px 6px -2px;
+    --shadow-extra: rgba(139, 38, 53, 0.1) 0px 20px 25px -5px,
+        rgba(139, 38, 53, 0.04) 0px 10px 10px -5px;
+}
+
+.page-wrapper {
+    width: 100%;
+    z-index: 11111;
+}
+
+footer p, footer strong, footer b, footer {
+    color: var(--color-white);
+    
+}
+
+.footer-top {
+    background: var(--color-primary-light);
+    background-size: cover;
+    background-position: center;
+    padding: 30px 0 20px;
+     font-family: "Roboto", ui-sans-serif, sans-serif;
+    font-size: clamp(1rem, 2vw, 1.125rem);
+}
+
+.footer-top, .footer-bottom {
+    background-color: var(--color-primary-light);
+}
+
+.footer-bottom {
+    padding: 15px 0;
+    border-top: 1px solid var(--color-primary-dark);
+    background-color: var(--color-primary-light) !important;
+    color: var(--color-white);
+    font-family: rubik;
+}
+
+.footer-site-info {
+    font-size: 92.86%;
+}
+
+#footer-navigation, #footer-navigation li a:hover, .custom-footer, .custom-footer li a:hover {
+    color: var(--color-secondary);
+}
+
+#footer-navigation, #footer-navigation li a, .custom-footer, .custom-footer li a {
+    color: var(--color-white);
+    padding-top: 15px;
+}
+
+.footer-bottom ul {
+    margin: 0;
+}
+
+.inline-inside {
+    font-size: 0;
+    line-height: 0;
+}
+
+.clearfix:after, .clearfix:before {
+    content: "";
+    display: table;
+}
+
+#footer-menu li {
+    display: inline-block;
+    padding: 0 21px;
+    position: relative;
+    line-height: 1;
+}
+
+#footer-menu li+li:before {
+    content: '';
+    width: 0;
+    height: 100%;
+    position: absolute;
+    left: -1px;
+    top: 0;
+    font-size: 0;
+    border-left: 1px solid var(--color-primary-dark);
+    border-right: 1px solid var(--color-primary);
+}
+
+#footer-socials {
+    text-align: right;
+}
+
+#footer-socials .socials {
+    text-align: right;
+    margin: 0 -7px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+a.socials-item {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    transition: all 0.3s;
+    margin: 0 5px;
+    line-height: 16px;
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-primary-dark);
+    box-shadow: var(--shadow-medium);
+}
+
+.socials-item i {
+    display: inline-block;
+    font-weight: normal;
+    width: 1em;
+    height: 1em;
+    line-height: 1;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: top;
+    font-feature-settings: normal;
+    font-kerning: auto;
+    font-language-override: normal;
+    font-size-adjust: none;
+    font-stretch: normal;
+    font-style: normal;
+    font-synthesis: weight style;
+    font-variant: normal;
+    font-weight: normal;
+    text-rendering: auto;
+}
+
+.facebook {
+    color: #4e64b5;
+}
+
+.twitter {
+    color: #00aced;
+}
+
+.instagram {
+    color: #9a8f62;
+}
+
+.youtube {
+    color: #c82929;
+}
+
+.telegram {
+    color: #2ca5e0;
+}
+
+a.socials-item:hover {
+    box-shadow: var(--shadow-large);
+    border-color: var(--color-secondary);
+    background: linear-gradient(to right, var(--color-primary-light), var(--color-primary), var(--color-primary-dark));
+}
+
+.footer-bottom a:hover {
+    color: var(--color-secondary);
+}
+
+footer p, footer li {
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.widget {
+    margin-bottom: 50px;
+}
+
+.footer-title {
+    margin-bottom: 40px;
+    color: var(--color-white);
+    font-weight: 500;
+    text-transform: capitalize;
+    padding-bottom: 15px;
+    font-size: 16px;
+    position: relative;
+}
+
+.footer-title:after {
+    width: 50px;
+    background: var(--color-white);
+    opacity: 0.2;
+    height: 1px;
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.gem-contacts-item {
+    padding-top: 10px;
+    font-size: 15px;
+}
+
+.gem-contacts-item i {
+    padding-right: 10px;
+}
+
+footer .widget ul {
+    list-style: none;
+    margin-top: 5px;
+}
+
+.posts li {
+    border-bottom: 1px solid var(--color-primary-dark);
+    padding-bottom: 12px;
+    padding-top: 6px;
+}
+
+.gem-pp-posts-date {
+    color: var(--color-secondary);
+    font-size: 89.5%;
+}
+
+footer p {
+    line-height: 24px;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+
+.wpcf7-form-control-wrap .wpcf7-form-control {
+    padding: 7px !important;
+    width: 100%;
+}
+
+.wpcf7-form-control-wrap input {
+    background: var(--color-primary-dark);
+    overflow: hidden;
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-primary-dark);
+    box-shadow: var(--shadow-small);
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+.wpcf7-form-control-wrap input:hover {
+    background-color: transparent;
+    box-shadow: var(--shadow-medium);
+    border-color: var(--color-white);
+    color: var(--color-white);
+}
+
+.wpcf7 .wpcf7-form .contact-form-footer textarea {
+    height: 160px;
+    width: 100%;
+}
+
+.wpcf7-form-control-wrap textarea:hover {
+    background-color: transparent;
+    box-shadow: var(--shadow-medium);
+    border-color: var(--color-white);
+    color: var(--color-white);
+}
+
+.wpcf7-form-control-wrap textarea {
+    background: var(--color-primary-dark);
+    overflow: hidden;
+    border: 1px solid var(--color-primary);
+    background-color: var(--color-primary-dark);
+    box-shadow: var(--shadow-small);
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+textarea {
+    overflow: auto;
+    resize: vertical;
+}
+
+.wpcf7 .wpcf7-form .contact-form-footer .wpcf7-submit {
+    width: 100%;
+    padding: 11px;
+    margin: 0;
+    line-height: 0;
+}
+
+.wpcf7-form .contact-form-footer .wpcf7-submit {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    cursor: pointer;
+    padding: 15px 40px;
+    font-size: 14px;
+    font-weight: 400;
+    transition: all 0.5s;
+    letter-spacing: 2px;
+    box-shadow: var(--shadow-medium);
+    text-transform: uppercase;
+    outline: none !important;
+    border-radius: 5px;
+    min-width: 140px;
+    border-width: 1px 0px 0px 1px;
+    border-style: solid;
+    border-color: var(--color-primary-dark);
+}
+
+.wpcf7-form input[type=submit] {
+    height: 40px;
+    line-height: 21px;
+    padding: 10px 40px;
+    font-size: 14px;
+}
+
+.posts li a {
+    color: var(--color-white);
+}
+
+.wpcf7-form .contact-form-footer .wpcf7-submit:hover {
+    box-shadow: var(--shadow-large);
+    border-color: var(--color-secondary);
+    background: linear-gradient(to right, var(--color-primary-light), var(--color-primary), var(--color-primary-dark));
+    color: var(--color-white);
+}
+
+img {
+    border-style: none;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+}
+
+.widget_gallery a {
+    display: inline-block;
+}
+
+footer .widget ul {
+    list-style: none;
+    margin-top: 5px;
+}
+
+.widget_gallery ul {
+    padding-left: 0;
+    display: table;
+}
+
+.widget_gallery li {
+    display: inline-block;
+    width: 33.33%;
+    float: left;
+    transition: all 0.5s;
+    padding: 2px;
+}
+
+.widget_gallery.gallery-grid-4 li {
+    width: 30%;
+}
+
+#waterdrop {
+    height: 30px;
+}
+
+#waterdrop canvas {
+    bottom: -70px !important;
+}
+
+.footer-site-info {
+    padding-top: 10px;
+}
