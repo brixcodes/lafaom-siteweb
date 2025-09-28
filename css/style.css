@@ -3258,3 +3258,654 @@ background-color: var(--color-white);
   color: var(--color-primary-dark); /* rouge pour "OK pour moi" */
   font-weight: bold;
 }
+
+/* Formation Card Styles */
+.formations-card-container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.formation-card {
+    height: 400px;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-end;
+    text-decoration: none;
+    border: 4px solid var(--color-primary);
+    margin-bottom: 20px;
+    background-image: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.formation-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-extra);
+}
+
+.formation-inner {
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; 
+    background: white;
+    box-sizing: border-box;
+    padding: 40px;
+    width: 100%;
+}
+
+.formation-title {
+    font-size: 24px;
+    color: var(--color-gray-800);  
+    text-align: center;
+    font-weight: 700;
+    text-shadow: 0px 2px 2px rgba(166, 248, 213, 0.3);
+    position: relative;
+    margin: 0 0 20px 0;
+    line-height: 1.2;
+}
+
+.formation-subtitle {
+    color: var(--color-primary);
+    text-align: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+@media (min-width: 768px) {
+    .formation-card {
+        height: 500px;
+    }
+    
+    .formation-inner {
+        width: 50%;
+        height: 100%;
+    }
+    
+    .formation-title {
+        font-size: 30px;
+    }
+}
+
+/* Formation Button Styles */
+.formation-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.formation-btn {
+    padding: 15px 30px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    border: 2px solid var(--color-primary);
+    background: var(--color-primary);
+    color: white;
+}
+
+.formation-btn:hover {
+    background: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-medium);
+}
+
+.formation-btn i {
+    font-size: 18px;
+    transition: transform 0.3s ease;
+}
+
+.formation-btn:hover i {
+    transform: translateX(3px);
+}
+
+@media (max-width: 768px) {
+    .formation-btn {
+        padding: 12px 24px;
+        font-size: 14px;
+    }
+}
+
+/* New Footer Styles */
+.footer {
+    background-color: var(--color-gray-900);
+    padding: 70px 0 20px 0;
+}
+
+.footer .container {
+    max-width: 1170px;
+    margin: auto;
+}
+
+.footer .row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer-col {
+    width: 25%;
+    padding: 0 15px;
+}
+
+.footer-col h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+}
+
+.footer-col h4::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: var(--color-primary);
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+}
+
+.footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #bbbbbb;
+    text-decoration: none;
+    font-weight: 300;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px;
+}
+
+.footer-col .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+}
+
+.footer-col .social-links a:hover {
+    color: var(--color-gray-900);
+    background-color: var(--color-primary);
+}
+
+.footer-bottom {
+    border-top: 1px solid var(--color-gray-700);
+    margin-top: 40px;
+    padding-top: 20px;
+}
+
+.footer-copyright {
+    text-align: center;
+}
+
+.footer-copyright p {
+    color: #bbbbbb;
+    font-size: 14px;
+    margin: 0;
+}
+
+.footer-copyright a {
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.footer-copyright a:hover {
+    color: #ffffff;
+}
+
+/* Footer Responsive */
+@media (max-width: 767px) {
+    .footer-col {
+        width: 50%;
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 574px) {
+    .footer-col {
+        width: 100%;
+    }
+}
+
+/* Enhanced Cookie System Styles */
+.cookie-modal {
+    transition: all 0.3s ease;
+}
+
+.cookie-modal.show .cookie-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.cookie-content {
+    transform: scale(0.9);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+/* Custom Options Modal */
+.custom-options {
+    max-width: 600px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: #f0f0f0;
+    color: #333;
+}
+
+.cookie-options {
+    margin: 20px 0;
+}
+
+.cookie-option {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    background: #fafafa;
+}
+
+.option-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.option-header h3 {
+    margin: 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.cookie-option p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.4;
+}
+
+/* Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: var(--color-primary);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+input:disabled + .slider {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+/* Cookie Notifications */
+.cookie-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    padding: 15px;
+    max-width: 350px;
+    z-index: 10000;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+}
+
+.cookie-notification.show {
+    transform: translateX(0);
+}
+
+.notification-content h4 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.notification-content p {
+    margin: 0;
+    font-size: 14px;
+    color: #666;
+}
+
+.notification-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #999;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.notification-close:hover {
+    color: #333;
+}
+
+/* Animations */
+@keyframes slideInUp {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Enhanced Responsive Design for Cookies */
+@media (max-width: 768px) {
+    .cookie-modal .cookie-content {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+        max-height: calc(100vh - 20px);
+    }
+    
+    .custom-options {
+        max-width: 100%;
+        max-height: 90vh;
+    }
+    
+    .cookie-option {
+        padding: 15px;
+    }
+    
+    .option-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .option-header h3 {
+        font-size: 15px;
+    }
+    
+    .cookie-option p {
+        font-size: 13px;
+    }
+    
+    .cookie-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .cookie-actions .btn {
+        width: 100%;
+        margin: 0;
+    }
+    
+    .cookie-notification {
+        top: 10px;
+        right: 10px;
+        left: 10px;
+        max-width: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .cookie-modal .cookie-content {
+        margin: 5px;
+        max-width: calc(100% - 10px);
+        padding: 20px 15px;
+    }
+    
+    .cookie-header h2 {
+        font-size: 18px;
+        line-height: 1.3;
+    }
+    
+    .cookie-header .logo-block {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+    
+    .cookie-usage {
+        padding: 10px;
+    }
+    
+    .cookie-usage h3 {
+        font-size: 14px;
+    }
+    
+    .cookie-usage ul {
+        font-size: 12px;
+    }
+    
+    .cookie-cert {
+        font-size: 11px;
+    }
+    
+    .switch {
+        width: 45px;
+        height: 22px;
+    }
+    
+    .slider:before {
+        height: 16px;
+        width: 16px;
+        left: 3px;
+        bottom: 3px;
+    }
+    
+    input:checked + .slider:before {
+        transform: translateX(23px);
+    }
+}
+
+/* Accessibility Improvements */
+.cookie-modal:focus-within {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.btn:focus,
+.close-btn:focus,
+.notification-close:focus {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .cookie-modal {
+        border: 2px solid #000;
+    }
+    
+    .cookie-option {
+        border: 2px solid #000;
+    }
+    
+    .slider {
+        border: 2px solid #000;
+    }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .cookie-modal,
+    .cookie-content,
+    .cookie-notification,
+    .slider,
+    .slider:before {
+        transition: none;
+    }
+    
+    .cookie-notification {
+        animation: none;
+    }
+}
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .pagination-number.active {
+      font-weight: bold;
+      color: #fff;
+      background: var(--color-primary);
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+    .pagination-number {
+      margin: 0 5px;
+      cursor: pointer;
+    }
+/* --- Offcanvas --- */
+.offcanvas {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    background: var(--color-white);
+    box-shadow: -2px 0 10px rgba(0,0,0,0.3);
+    z-index: 3000;
+    transition: right 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .offcanvas.active {
+    right: 0;
+  }
+  
+  .offcanvas-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    /* background: rgba(0,0,0,0.5); */
+    z-index: -1;
+    display: none;
+  }
+  
+  .offcanvas.active + .offcanvas-overlay,
+  .offcanvas-overlay.active {
+    display: block;
+  }
+  
+  .offcanvas-content {
+    padding: 2rem;
+    overflow-y: auto;
+    flex: 1;
+  }
+  
+  .offcanvas-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 2rem;
+    background: none;
+    border: none;
+    color: var(--color-secondary);
+    cursor: pointer;
+  }
+  
+  .offcanvas-body h2 {
+    margin-bottom: 1rem;
+    color: var(--color-primary);
+    font-size: 1.5rem;
+  }
+  
+  .offcanvas-body p {
+    line-height: 1.6;
+    color: var(--color-gray-700);
+  }
+  
