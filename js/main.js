@@ -55,8 +55,15 @@ window.addEventListener("scroll", () => {
     } else {
         headerMenu.style.background = "transparent";
         Menulink.forEach(link => {
-            link.style.color = '#FFFFFF';
-        });
+            if (window.innerWidth <= 576) { // Écran mobile (≤ 576px)
+                link.style.color = '#E85A7A'; // Rouge pour mobile
+            } else if (window.innerWidth <= 768) { // Écran tablette (≤ 768px)
+                link.style.color = '#FFFFFF'; // Vert pour tablette
+            } else { // Écran ordinateur (> 768px)
+                link.style.color = '#FFFFFF'; // Blanc pour ordinateur
+            }}
+        )
+      
 
 
     }
@@ -223,7 +230,7 @@ function animateCounter(element, target, duration = 2000) {
     let start = 0;
     const increment = target / (duration / 16); // 60fps
 
-   
+
     // Add animation classes
     element.classList.add('counting', 'animating');
 
@@ -247,7 +254,7 @@ function animateCounter(element, target, duration = 2000) {
 const statsObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            
+
             // Try both selectors to be sure
             let statNumbers = entry.target.querySelectorAll('.stat-number[data-target]');
             if (statNumbers.length === 0) {
@@ -345,11 +352,11 @@ class CookieManager {
     }
 
     bindEvents() {
-        const btn = document.getElementById("cookie-btn");
-        const modal = document.getElementById("cookie-modal");
-        const refuse = document.getElementById("btn-refuse");
-        const choose = document.getElementById("btn-choose");
-        const accept = document.getElementById("btn-accept");
+const btn = document.getElementById("cookie-btn");
+const modal = document.getElementById("cookie-modal");
+const refuse = document.getElementById("btn-refuse");
+const choose = document.getElementById("btn-choose");
+const accept = document.getElementById("btn-accept");
 
         if (btn) {
             btn.onclick = () => this.showModal();
@@ -367,9 +374,9 @@ class CookieManager {
             accept.onclick = () => this.handleAccept();
         }
 
-        // Fermer modal si on clique dehors
+// Fermer modal si on clique dehors
         if (modal) {
-            window.onclick = (e) => {
+window.onclick = (e) => {
                 if (e.target === modal) {
                     this.hideModal();
                 }

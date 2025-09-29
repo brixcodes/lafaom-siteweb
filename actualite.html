@@ -2,103 +2,100 @@
 <html lang="fr">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Actualités - Institut de Formation Lafaom-Mao</title>
-  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-  <link rel="icon" type="image/png" href="assets/Images/logo.png">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+      <link rel="icon" type="image/png" href="assets/Images/logo.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link href="css/footer.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+       <link href="css/footer.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
   
 </head>
 
 <body>
   <!-- Header -->
-  <header class="header" id="header">
-    <nav class="navbar container">
-      <a href="index.html" class="brand">
-        <img src="assets/Images/logo.png" alt="Lafaom Mao" class="brand-logo">
+    <header class="header" id="header">
+        <nav class="navbar container">
+            <a href="index.html" class="brand">
+                <img src="assets/Images/logo.png" alt="Lafaom Mao" class="brand-logo">
         <span class="brand-text">Institut Lafaom-Mao</span>
-      </a>
-      <div class="burger" id="burger">
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-        <span class="burger-line"></span>
-      </div>
-      <div class="menu" id="menu">
-        <ul class="menu-inner">
+            </a>
+            <div class="burger" id="burger">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </div>
+            <div class="menu" id="menu">
+                <ul class="menu-inner">
           <li class="menu-item"><a href="about.html" class="menu-link">Institut</a></li>
-          <li class="menu-item"><a href="#" class="menu-link">Actualités</a></li>
-          <li class="menu-item"><a href="#" class="menu-link">Formation</a></li>
-          <li class="menu-item"><a href="#" class="menu-link">Recrutement</a></li>
-        </ul>
-      </div>
-      <span class="overlay"></span>
-      <a href="#" class="btn btn-primary menu-cta">Espace Candidat</a>
-    </nav>
-  </header>
+                    <li class="menu-item"><a href="#" class="menu-link">Actualités</a></li>
+                    <li class="menu-item"><a href="recrutement.html" class="menu-link">Recrutement</a></li>
+                    <li class="menu-item"><a href="#" class="menu-link">Formation</a></li>
+                </ul>
+            </div>
+            <span class="overlay"></span>
+            <a href="#" class="btn btn-primary menu-cta">Espace Candidat</a>
+        </nav>
+    </header>
 
   <!-- Hero -->
-  <main class="main">
+    <main class="main">
     <section class="page-hero" style="background-image: url('assets/Images/groupe-d-afro-americains-travaillant-ensemble(1).jpg');">
-      <div class="container about-container">
-        <div class="page-hero-content">
-          <div class="hero-colored-box">
-            <h1 class="title-large">ACTUALITÉS</h1>
-            <div class="hero-subtitle">
-              <div class="hero-line"></div>
+            <div class="container about-container">
+                <div class="page-hero-content">
+                    <div class="hero-colored-box">
+                        <h1 class="title-large">ACTUALITÉS</h1>
+                        <div class="hero-subtitle">
+                            <div class="hero-line"></div>
               <p class="text-large">Découvrez les dernières nouvelles de l'Institut de Formation Lafaom-Mao.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
+        </section>
 
     <!-- News Section -->
-    <section class="news-content-section">
-      <div class="container">
+        <section class="news-content-section">
+            <div class="container">
         <!-- Filtres -->
-        <div class="news-filters">
-          <div class="filter-group">
-            <div class="category-filter">
-              <label class="filter-label" for="categorySelect">Catégories</label>
-              <select id="categorySelect" class="filter-select" aria-label="Filtrer par catégorie">
-                <option value="all" selected>Toutes</option>
-                <option value="formation">Formation</option>
-                <option value="accompagnement">Accompagnement</option>
-                <option value="réinsertion">Réinsertion</option>
-                <option value="partenariat">Partenariat</option>
-              </select>
-            </div>
-          </div>
-        </div>
+                <div class="news-filters">
+                    <div class="filter-group">
+                        <div class="category-filter">
+                            <label class="filter-label" for="categorySelect">Catégories</label>
+                            <select id="categorySelect" class="filter-select" aria-label="Filtrer par catégorie">
+                                <option value="all" selected>Toutes</option>
+                <option value="loading" disabled>Chargement des catégories...</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
 
         <!-- Titre + pagination -->
-        <div class="news-header">
-          <h2 class="news-main-title">PUBLICATIONS</h2>
-          <div class="news-pagination">
-            <span class="pagination-text">page</span>
-            <div class="pagination-numbers">
+                <div class="news-header">
+                    <h2 class="news-main-title">PUBLICATIONS</h2>
+                    <div class="news-pagination">
+                        <span class="pagination-text">page</span>
+                        <div class="pagination-numbers">
               <!-- Pagination générée dynamiquement -->
-            </div>
-          </div>
-        </div>
+                        </div>
+                    </div>
+                </div>
 
         <!-- Conteneur cartes -->
-        <div class="news-cards-main">
+                <div class="news-cards-main">
           <ul class="cards"></ul>
-        </div>
-      </div>
-    </section>
-  </main>
+                </div>
+            </div>
+        </section>
+          </main>
 
   <!-- Footer -->
-  <div class="page-wrapper">
+          <div class="page-wrapper">
     <div id="waterdrop"></div>
     <footer class="footer">
-      <div class="container">
-        <div class="row">
+       <div class="container">
+  <div class="row">
           <div class="footer-col">
             <h4>Institut</h4>
             <ul>
@@ -107,7 +104,7 @@
               <li><a href="#">Programme Mao</a></li>
               <li><a href="#">Certification</a></li>
             </ul>
-          </div>
+        </div>
           <div class="footer-col">
             <h4>Formation</h4>
             <ul>
@@ -117,7 +114,7 @@
               <li><a href="#">Frais de formation</a></li>
               <li><a href="#">Bourses</a></li>
             </ul>
-          </div>
+      </div>
           <div class="footer-col">
             <h4>Contact</h4>
             <ul>
@@ -134,15 +131,15 @@
               <a href="#"><i class="fab fa-twitter"></i></a>
               <a href="#"><i class="fab fa-instagram"></i></a>
               <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="footer-bottom">
+    </div>
+  </div>
+</div>
+<div class="footer-bottom">
           <div class="footer-copyright">
             <p>2025 © <a href="#" target="_blank">INSTITUT DE FORMATION LAFAOM-MAO - Ziguinchor, Sénégal</a></p>
-          </div>
-        </div>
-      </div>
+    </div>
+  </div>
+</div>
     </footer>
   </div>
 
@@ -152,11 +149,11 @@
   <script src="js/main.js"></script>
   <script src="https://daniellaharel.com/raindrops/js/raindrops.js"></script>
   <script> jQuery('#waterdrop').raindrops({color:'#1c1f2f', canvasHeight:150, density: 0.1, frequency: 20}); </script>
-
+ 
   <!-- Script actu dynamique -->
-  <script>
+ <script>
   document.addEventListener('DOMContentLoaded', async function () {
-      const filterSelect = document.getElementById('categorySelect');
+    const filterSelect = document.getElementById('categorySelect');
       const newsContainer = document.querySelector('.news-cards-main .cards');
       const paginationContainer = document.querySelector('.pagination-numbers');
 
@@ -217,7 +214,130 @@
           filterCards(currentCategory);
       }
 
+      // API Configuration
+      const API_BASE_URL = 'https://lafaom.vertex-cam.com/api/v1/blog';
+      
+      // Load categories from API
+      async function loadCategories() {
+          try {
+              // Show loading state
+              if (filterSelect) {
+                  filterSelect.innerHTML = '<option value="all" selected>Toutes</option><option value="loading" disabled>Chargement des catégories...</option>';
+                  filterSelect.disabled = true;
+              }
+              
+              const response = await fetch(`${API_BASE_URL}/categories`);
+              
+              if (!response.ok) {
+                  throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              
+              const data = await response.json();
+              
+              if (data.success && data.data && data.data.length > 0) {
+                  populateCategorySelect(data.data);
+                  return data.data;
+              } else {
+                  console.warn('Aucune catégorie trouvée dans la réponse API');
+                  return loadFallbackCategories();
+              }
+          } catch (error) {
+              console.error('Erreur lors du chargement des catégories:', error);
+              return loadFallbackCategories();
+          } finally {
+              // Re-enable select
+    if (filterSelect) {
+                  filterSelect.disabled = false;
+              }
+          }
+      }
+      
+      // Populate category select with API data
+      function populateCategorySelect(categories) {
+          if (!filterSelect) return;
+          
+          // Clear existing options including loading state
+          filterSelect.innerHTML = '<option value="all" selected>Toutes</option>';
+          
+          // Sort categories by title alphabetically
+          const sortedCategories = categories.sort((a, b) => {
+              return a.title.localeCompare(b.title, 'fr', { sensitivity: 'base' });
+          });
+          
+          // Add categories to select
+          sortedCategories.forEach(category => {
+              const option = document.createElement('option');
+              option.value = category.slug;
+              option.textContent = category.title;
+              option.setAttribute('data-category-id', category.id);
+              filterSelect.appendChild(option);
+          });
+          
+          // Add visual feedback
+          filterSelect.classList.add('success');
+          setTimeout(() => {
+              filterSelect.classList.remove('success');
+          }, 2000);
+          
+          // Show success notification
+          showNotification(`${sortedCategories.length} catégories chargées avec succès`, 'success');
+          
+          console.log('Catégories chargées depuis l\'API:', sortedCategories);
+      }
+      
+      // Fallback categories if API fails
+      function loadFallbackCategories() {
+          if (!filterSelect) return;
+          
+          const fallbackCategories = [
+              { id: 1, slug: 'formation', title: 'Formation' },
+              { id: 2, slug: 'accompagnement', title: 'Accompagnement' },
+              { id: 3, slug: 'reinsertion', title: 'Réinsertion' },
+              { id: 4, slug: 'partenariat', title: 'Partenariat' }
+          ];
+          
+          populateCategorySelect(fallbackCategories);
+          
+          // Show fallback notification
+          showNotification('Catégories de secours chargées', 'warning');
+          console.log('Catégories de secours chargées');
+          return fallbackCategories;
+      }
+      
+      // Show notification to user
+      function showNotification(message, type = 'info') {
+          // Create notification element
+          const notification = document.createElement('div');
+          notification.className = `category-notification category-notification-${type}`;
+          notification.innerHTML = `
+              <div class="notification-content">
+                  <span class="notification-message">${message}</span>
+                  <button class="notification-close" onclick="this.parentElement.parentElement.remove()">×</button>
+              </div>
+          `;
+          
+          // Add to page
+          document.body.appendChild(notification);
+          
+          // Auto remove after 5 seconds
+          setTimeout(() => {
+              if (notification.parentElement) {
+                  notification.remove();
+              }
+          }, 5000);
+      }
+
       function getCategoryName(categoryId) {
+          // Try to get from loaded categories first
+          const categorySelect = document.getElementById('categorySelect');
+          if (categorySelect) {
+              const option = categorySelect.querySelector(`option[data-category-id="${categoryId}"]`);
+              if (option) {
+                  return option.value;
+              }
+          }
+          
+          // Fallback to hardcoded mapping
           switch (categoryId) {
               case 1: return "formation";
               case 2: return "accompagnement";
@@ -227,20 +347,20 @@
           }
       }
 
-      function filterCards(category) {
+    function filterCards(category) {
           currentCategory = category; 
           const cards = newsContainer.querySelectorAll('.cards_item');
           cards.forEach(card => {
-              const cardCategory = (card.getAttribute('data-category') || '').toLowerCase();
-              if (category === 'all' || cardCategory === category) {
-                  card.style.display = 'flex';
-                  card.style.animation = 'fadeIn 0.3s ease';
-              } else {
-                  card.style.display = 'none';
-              }
-          });
-      }
-
+            const cardCategory = (card.getAttribute('data-category') || '').toLowerCase();
+            if (category === 'all' || cardCategory === category) {
+                card.style.display = 'flex';
+                card.style.animation = 'fadeIn 0.3s ease';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+     
       if (filterSelect) {
           filterSelect.addEventListener('change', function () {
               filterCards(this.value);
@@ -261,8 +381,11 @@
           }
       }
 
+      // Load categories from API when page loads
+      await loadCategories();
+      
       await loadNews(currentPage);
-  });
-  </script>
+ });
+ </script>
 </body>
 </html>

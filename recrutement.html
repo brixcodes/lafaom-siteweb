@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recrutement - Institut de Formation Lafaom-Mao</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/swiper-testimonials.css">
+    <link rel="icon" type="image/png" href="assets/Images/logo.png">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <nav class="navbar container">
+            <a href="index.html" class="brand">
+                <img src="assets/Images/logo.png" alt="Lafaom Mao" class="brand-logo">
+                <span class="brand-text">Institut Lafaom-Mao</span>
+            </a>
+            <div class="burger" id="burger">
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+            </div>
+            <div class="menu" id="menu">
+                <ul class="menu-inner">
+                    <li class="menu-item"><a href="about.html" class="menu-link">Institut</a></li>
+                    <li class="menu-item"><a href="actualite.html" class="menu-link">Actualités</a></li>
+                    <li class="menu-item"><a href="#" class="menu-link">Recrutement</a></li>
+                    <li class="menu-item"><a href="#" class="menu-link">Formation</a></li>
+                </ul>
+            </div>
+            <span class="overlay"></span>
+            <a href="#" class="btn btn-primary menu-cta">Espace Candidat</a>
+        </nav>
+    </header>
+
+    <main class="main">
+        <!-- Hero Section -->
+        <section class="page-hero" style="background-image: url('/assets/Images/banner2.jpg');">
+            <div class="container about-container">
+                <div class="page-hero-content">
+                    <div class="hero-colored-box">
+                        <h1 class="title-large">RECRUTEMENT - INSTITUT DE FORMATION LAFAOM-MAO</h1>
+                        <div class="hero-subtitle">
+                            <div class="hero-line"></div>
+                            <p class="text-large">Rejoignez notre équipe et participez à la formation des AVMJ</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recruitment Sections -->
+        <section class="recruitment-sections">
+            <div class="container">
+                <!-- Devenir bénévole -->
+                <div class="recruitment-section">
+                    <h2 class="recruitment-title">Devenir bénévole</h2>
+                    <div class="recruitment-line"></div>
+                    <p class="recruitment-text">
+                        Vous adhérez au projet de l'Institut Lafaom-Mao et souhaitez vous investir dans une action utile dans un monde de valeurs ? 
+                        Vous pouvez nous apporter votre soutien en nous donnant un peu de votre temps.
+                    </p>
+                    <p class="recruitment-text-secondary">
+                        Nous mettons ponctuellement en ligne des offres de bénévolat, en fonction des besoins : retrouvez nos offres sur cette page.
+                    </p>
+                </div>
+
+                <!-- Devenir formateur -->
+                <div class="recruitment-section">
+                    <h2 class="recruitment-title">Devenir formateur</h2>
+                    <div class="recruitment-line"></div>
+                    <p class="recruitment-text">
+                        Vous êtes un professionnel expérimenté dans le domaine judiciaire ou de la formation et souhaitez partager votre expertise ? 
+                        Rejoignez notre réseau de formateurs et contribuez à la formation des Auxiliaires de Vie en Univers Judiciaire.
+                    </p>
+                    <p class="recruitment-text-secondary">
+                        Nous recherchons des formateurs qualifiés pour nos programmes de formation : découvrez nos offres de postes de formateurs sur cette page.
+                    </p>
+                </div>
+
+                <!-- Effectuer un stage -->
+                <div class="recruitment-section">
+                    <h2 class="recruitment-title">Effectuer un stage</h2>
+                    <div class="recruitment-line"></div>
+                    <p class="recruitment-text">
+                        L'Institut Lafaom-Mao accueille régulièrement au sein de l'équipe des étudiants sous convention pour des missions courtes, 
+                        dans le cadre de leur cursus ou de leur projet professionnel. Les candidatures motivées par un désir d'engagement 
+                        dans la formation professionnelle ou un intérêt pour le secteur associatif sont valorisées.
+                    </p>
+                    <p class="recruitment-text-secondary">
+                        Nous ne pouvons malheureusement répondre aux nombreuses propositions spontanées : retrouvez toutes nos offres sur cette page et postulez en ligne.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Job Offers Section -->
+        <section class="job-offers-section">
+            <div class="container">
+                <div class="job-offers-header">
+                    <h2 class="job-offers-title">Offres d'emploi</h2>
+                    <p class="job-offers-subtitle">DÉCOUVREZ NOS POSTES DISPONIBLES</p>
+                </div>
+
+                <!-- Filters and Search -->
+                <div class="job-filters">
+                    <div class="filter-group">
+                        <div class="search-filter">
+                            <label class="filter-label" for="jobSearch">Rechercher</label>
+                            <input type="text" id="jobSearch" class="filter-input" placeholder="Rechercher un poste, une localisation...">
+                        </div>
+                        <div class="location-filter">
+                            <label class="filter-label" for="locationSelect">Localisation</label>
+                            <select id="locationSelect" class="filter-select">
+                                <option value="all">Toutes les localisations</option>
+                            </select>
+                        </div>
+                        <div class="contract-filter">
+                            <label class="filter-label" for="contractSelect">Type de contrat</label>
+                            <select id="contractSelect" class="filter-select">
+                                <option value="all">Tous les contrats</option>
+                                <option value="CDI">CDI</option>
+                                <option value="CDD">CDD</option>
+                                <option value="Stage">Stage</option>
+                                <option value="Bénévolat">Bénévolat</option>
+                            </select>
+                        </div>
+                        <div class="salary-filter">
+                            <label class="filter-label" for="salarySelect">Salaire minimum</label>
+                            <select id="salarySelect" class="filter-select">
+                                <option value="all">Tous les salaires</option>
+                                <option value="500">500+ EUR</option>
+                                <option value="1000">1000+ EUR</option>
+                                <option value="1500">1500+ EUR</option>
+                                <option value="2000">2000+ EUR</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Loading State -->
+                <div id="loadingOffers" class="loading-container">
+                    <div class="loading-spinner"></div>
+                    <p>Chargement des offres d'emploi...</p>
+                </div>
+
+                <!-- Job Offers Grid -->
+                <div id="jobOffersGrid" class="job-offers-grid" style="display: none;">
+                    <!-- Les offres seront chargées dynamiquement -->
+                </div>
+
+                <!-- Error State -->
+                <div id="errorOffers" class="error-container" style="display: none;">
+                    <div class="error-icon">
+                        <i class="bx bx-error-circle"></i>
+                    </div>
+                    <h3>Erreur de chargement</h3>
+                    <p>Impossible de charger les offres d'emploi. Veuillez réessayer plus tard.</p>
+                    <button id="retryButton" class="btn btn-primary">Réessayer</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Offcanvas for Job Details -->
+    <div id="jobOffcanvas" class="job-offcanvas">
+        <div class="offcanvas-overlay"></div>
+        <div class="offcanvas-content">
+            <div class="offcanvas-header">
+                <h2 id="offcanvasTitle" class="offcanvas-title">Détails de l'offre</h2>
+                <button id="closeOffcanvas" class="offcanvas-close">
+                    <i class="bx bx-x"></i>
+                </button>
+            </div>
+            <div class="offcanvas-body">
+                <div id="offcanvasContent">
+                    <!-- Le contenu sera chargé dynamiquement -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col">
+                    <h4>Institut</h4>
+                    <ul>
+                        <li><a href="about.html">À propos</a></li>
+                        <li><a href="#">Formation AVMJ</a></li>
+                        <li><a href="#">Programme Mao</a></li>
+                        <li><a href="#">Certification</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Formation</h4>
+                    <ul>
+                        <li><a href="#">Candidature</a></li>
+                        <li><a href="#">Programme</a></li>
+                        <li><a href="#">Calendrier</a></li>
+                        <li><a href="#">Frais de formation</a></li>
+                        <li><a href="#">Bourses</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:+221123456789">+221 123 456 789</a></li>
+                        <li><a href="#">Ziguinchor, Sénégal</a></li>
+                        <li><a href="#">Dakar, Sénégal</a></li>
+                        <li><a href="#">Nous contacter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Suivez-nous</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>2025 © <a href="#" target="_blank">INSTITUT DE FORMATION LAFAOM-MAO - Ziguinchor, Sénégal</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/swiper-init.js"></script>
+
+    <!-- Job Offers JavaScript -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // API Configuration
+        const API_BASE_URL = 'https://lafaom.vertex-cam.com/api/v1/job-offers';
+        
+        // DOM Elements
+        const loadingOffers = document.getElementById('loadingOffers');
+        const jobOffersGrid = document.getElementById('jobOffersGrid');
+        const errorOffers = document.getElementById('errorOffers');
+        const retryButton = document.getElementById('retryButton');
+        const jobOffcanvas = document.getElementById('jobOffcanvas');
+        const closeOffcanvas = document.getElementById('closeOffcanvas');
+        const offcanvasTitle = document.getElementById('offcanvasTitle');
+        const offcanvasContent = document.getElementById('offcanvasContent');
+        
+        // Load job offers from API
+        async function loadJobOffers() {
+            try {
+                showLoading();
+                
+                const response = await fetch(`${API_BASE_URL}?page=1&page_size=20&order_by=created_at&asc=asc`);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (data.data && data.data.length > 0) {
+                    displayJobOffers(data.data);
+                } else {
+                    showError('Aucune offre d\'emploi disponible');
+                }
+            } catch (error) {
+                console.error('Erreur lors du chargement des offres:', error);
+                showError('Erreur de connexion à l\'API');
+            }
+        }
+        
+        // Display job offers in grid
+        function displayJobOffers(offers) {
+            // Store offers globally for later use
+            currentOffers = offers;
+            filteredOffers = [...offers]; // Initialize filtered offers with all offers
+            
+            jobOffersGrid.innerHTML = '';
+            
+            offers.forEach(offer => {
+                const jobCard = createJobCard(offer);
+                jobOffersGrid.appendChild(jobCard);
+            });
+            
+            // Initialize filters
+            initializeFilters();
+            
+            hideLoading();
+            jobOffersGrid.style.display = 'grid';
+        }
+        
+        // Create job card element
+        function createJobCard(offer) {
+            const card = document.createElement('div');
+            // Alternate between primary and white cards
+            const isPrimaryCard = Math.random() < 0.3; // 30% chance of primary card
+            card.className = `job-card ${isPrimaryCard ? 'primary-card' : 'white-card'}`;
+            card.setAttribute('data-job-id', offer.id);
+            
+            const contractType = offer.contract_type || 'Non spécifié';
+            const location = offer.location || 'Non spécifié';
+            const salary = formatSalary(offer.salary, offer.currency);
+            const deadline = formatDate(offer.submission_deadline);
+            const weeklyHours = offer.weekly_hours || 'Non spécifié';
+            
+            // Determine if it's a new offer (created in last 30 days)
+            const isNew = new Date(offer.created_at) > new Date(Date.now() - 30 * 24 * 60 * 60 * 1000);
+            const isFormation = contractType === 'CDD' || contractType === 'CDI';
+            
+            // Create badges
+            let badges = '';
+            if (isNew) {
+                badges += '<span class="job-badge new">Nouveau</span>';
+            }
+            if (isFormation) {
+                badges += '<span class="job-badge formation">Formation</span>';
+            }
+            if (offer.weekly_hours && offer.weekly_hours > 35) {
+                badges += '<span class="job-badge mission">Mission</span>';
+            }
+            
+            card.innerHTML = `
+                <div class="job-card-header">
+                    <div class="job-card-content">
+                        ${badges ? `<div class="job-badges">${badges}</div>` : ''}
+                        <h3 class="job-title">${offer.title}</h3>
+                        <div class="job-meta">
+                            <div class="job-location">
+                                <i class="bx bx-map"></i>
+                                <span>${location}</span>
+                            </div>
+                            <div class="job-duration">
+                                <i class="bx bx-time"></i>
+                                <span>Formation ${weeklyHours}h/semaine</span>
+                            </div>
+                            <div class="job-availability">
+                                <i class="bx bx-calendar"></i>
+                                <span>Clôture: ${deadline}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="job-card-footer">
+                    <div class="job-availability-text">
+                        ${Math.floor(Math.random() * 3) + 1} session(s) disponible(s)
+                    </div>
+                    <button class="job-expand-btn ${isPrimaryCard ? 'primary-btn' : ''}" data-job-id="${offer.id}">
+                        +
+                    </button>
+                </div>
+            `;
+            
+            return card;
+        }
+        
+        // Show job details in offcanvas
+        function showJobDetails(jobId, offers) {
+            const offer = offers.find(o => o.id === jobId);
+            if (!offer) return;
+            
+            offcanvasTitle.textContent = offer.title;
+            offcanvasContent.innerHTML = createJobDetailsContent(offer);
+            
+            jobOffcanvas.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Create detailed job content
+        function createJobDetailsContent(offer) {
+            const contractType = offer.contract_type || 'Non spécifié';
+            const location = offer.location || 'Non spécifié';
+            const salary = formatSalary(offer.salary, offer.currency);
+            const startDate = formatDate(offer.start_date);
+            const deadline = formatDate(offer.submission_deadline);
+            const weeklyHours = offer.weekly_hours || 'Non spécifié';
+            const drivingLicense = offer.driving_license_required ? 'Oui' : 'Non';
+            const submissionFee = offer.submission_fee ? `${offer.submission_fee} ${offer.currency}` : 'Gratuit';
+            
+            return `
+                <div class="job-details">
+                    <div class="job-details-header">
+                        <div class="job-ref">Référence: ${offer.reference || 'N/A'}</div>
+                        <div class="job-contract">${contractType}</div>
+                    </div>
+                    
+                    <div class="job-details-section">
+                        <h3><i class="bx bx-briefcase"></i> Informations générales</h3>
+                        <div class="job-info-grid">
+                            <div class="job-info-item">
+                                <strong>Localisation:</strong> ${location}
+                            </div>
+                            <div class="job-info-item">
+                                <strong>Salaire:</strong> ${salary}
+                            </div>
+                            <div class="job-info-item">
+                                <strong>Début:</strong> ${startDate}
+                            </div>
+                            <div class="job-info-item">
+                                <strong>Heures/semaine:</strong> ${weeklyHours}h
+                            </div>
+                            <div class="job-info-item">
+                                <strong>Permis requis:</strong> ${drivingLicense}
+                            </div>
+                            <div class="job-info-item">
+                                <strong>Frais de candidature:</strong> ${submissionFee}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="job-details-section">
+                        <h3><i class="bx bx-target-lock"></i> Mission principale</h3>
+                        <div class="job-content">${offer.main_mission || 'Non spécifiée'}</div>
+                    </div>
+                    
+                    <div class="job-details-section">
+                        <h3><i class="bx bx-list-check"></i> Responsabilités</h3>
+                        <div class="job-content">${offer.responsibilities || 'Non spécifiées'}</div>
+                    </div>
+                    
+                    <div class="job-details-section">
+                        <h3><i class="bx bx-brain"></i> Compétences requises</h3>
+                        <div class="job-content">${offer.competencies || 'Non spécifiées'}</div>
+                    </div>
+                    
+                    <div class="job-details-section">
+                        <h3><i class="bx bx-user"></i> Profil recherché</h3>
+                        <div class="job-content">${offer.profile || 'Non spécifié'}</div>
+                    </div>
+                    
+                    ${offer.benefits ? `
+                    <div class="job-details-section">
+                        <h3><i class="bx bx-gift"></i> Avantages</h3>
+                        <div class="job-content">${offer.benefits}</div>
+                    </div>
+                    ` : ''}
+                    
+                    <div class="job-details-section">
+                        <h3><i class="bx bx-calendar"></i> Conditions</h3>
+                        <div class="job-content">${offer.conditions || 'Non spécifiées'}</div>
+                    </div>
+                    
+                    <div class="job-details-section">
+                        <h3><i class="bx bx-time"></i> Dates importantes</h3>
+                        <div class="job-info-grid">
+                            <div class="job-info-item">
+                                <strong>Date limite de candidature:</strong> ${deadline}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${offer.attachment && offer.attachment.length > 0 ? `
+                    <div class="job-details-section">
+                        <h3><i class="bx bx-paperclip"></i> Documents requis</h3>
+                        <div class="job-attachments">
+                            ${offer.attachment.map(doc => `<span class="attachment-tag">${doc}</span>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    <div class="job-actions">
+                        <button class="btn btn-primary">
+                            <i class="bx bx-send"></i> Postuler maintenant
+                        </button>
+                        <button class="btn btn-secondary">
+                            <i class="bx bx-download"></i> Télécharger l'offre
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Utility functions
+        function formatSalary(salary, currency) {
+            if (!salary) return 'Non spécifié';
+            return `${salary.toLocaleString()} ${currency || 'EUR'}`;
+        }
+        
+        function formatDate(dateString) {
+            if (!dateString) return 'Non spécifié';
+            return new Date(dateString).toLocaleDateString('fr-FR');
+        }
+        
+        function stripHtml(html) {
+            if (!html) return '';
+            const tmp = document.createElement('div');
+            tmp.innerHTML = html;
+            return tmp.textContent || tmp.innerText || '';
+        }
+        
+        function truncateText(text, maxLength) {
+            if (!text) return '';
+            return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+        }
+        
+        function showLoading() {
+            loadingOffers.style.display = 'block';
+            jobOffersGrid.style.display = 'none';
+            errorOffers.style.display = 'none';
+        }
+        
+        function hideLoading() {
+            loadingOffers.style.display = 'none';
+        }
+        
+        function showError(message) {
+            loadingOffers.style.display = 'none';
+            jobOffersGrid.style.display = 'none';
+            errorOffers.style.display = 'block';
+            errorOffers.querySelector('p').textContent = message;
+        }
+        
+        // Event listeners
+        retryButton.addEventListener('click', loadJobOffers);
+        
+        closeOffcanvas.addEventListener('click', () => {
+            closeOffcanvasWithAnimation();
+        });
+        
+        jobOffcanvas.addEventListener('click', (e) => {
+            if (e.target === jobOffcanvas || e.target.classList.contains('offcanvas-overlay')) {
+                closeOffcanvasWithAnimation();
+            }
+        });
+        
+        // Close offcanvas with animation
+        function closeOffcanvasWithAnimation() {
+            // Add closing animation class
+            jobOffcanvas.classList.add('closing');
+            
+            // Wait for animation to complete before hiding
+            setTimeout(() => {
+                jobOffcanvas.classList.remove('show', 'closing');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+        
+        // Store offers data globally
+        let currentOffers = [];
+        let filteredOffers = [];
+        
+        // Filter elements
+        const jobSearch = document.getElementById('jobSearch');
+        const locationSelect = document.getElementById('locationSelect');
+        const contractSelect = document.getElementById('contractSelect');
+        const salarySelect = document.getElementById('salarySelect');
+        
+        // Initialize filters
+        function initializeFilters() {
+            // Populate location filter
+            populateLocationFilter();
+            
+            // Add event listeners
+            jobSearch.addEventListener('input', filterJobs);
+            locationSelect.addEventListener('change', filterJobs);
+            contractSelect.addEventListener('change', filterJobs);
+            salarySelect.addEventListener('change', filterJobs);
+        }
+        
+        // Populate location filter with unique locations
+        function populateLocationFilter() {
+            if (currentOffers.length === 0) return;
+            
+            const locations = [...new Set(currentOffers.map(offer => offer.location))].filter(loc => loc);
+            locations.sort();
+            
+            locationSelect.innerHTML = '<option value="all">Toutes les localisations</option>';
+            locations.forEach(location => {
+                const option = document.createElement('option');
+                option.value = location;
+                option.textContent = location;
+                locationSelect.appendChild(option);
+            });
+        }
+        
+        // Filter jobs based on criteria
+        function filterJobs() {
+            const searchTerm = jobSearch.value.toLowerCase();
+            const selectedLocation = locationSelect.value;
+            const selectedContract = contractSelect.value;
+            const minSalary = salarySelect.value;
+            
+            filteredOffers = currentOffers.filter(offer => {
+                // Search filter
+                const matchesSearch = !searchTerm || 
+                    offer.title.toLowerCase().includes(searchTerm) ||
+                    offer.location.toLowerCase().includes(searchTerm) ||
+                    (offer.main_mission && stripHtml(offer.main_mission).toLowerCase().includes(searchTerm));
+                
+                // Location filter
+                const matchesLocation = selectedLocation === 'all' || offer.location === selectedLocation;
+                
+                // Contract filter
+                const matchesContract = selectedContract === 'all' || offer.contract_type === selectedContract;
+                
+                // Salary filter
+                const matchesSalary = minSalary === 'all' || (offer.salary && offer.salary >= parseInt(minSalary));
+                
+                return matchesSearch && matchesLocation && matchesContract && matchesSalary;
+            });
+            
+            displayFilteredJobs();
+        }
+        
+        // Display filtered jobs
+        function displayFilteredJobs() {
+            jobOffersGrid.innerHTML = '';
+            
+            if (filteredOffers.length === 0) {
+                jobOffersGrid.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">
+                            <i class="bx bx-search-alt"></i>
+                        </div>
+                        <h3>Aucune offre trouvée</h3>
+                        <p>Essayez de modifier vos critères de recherche</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            filteredOffers.forEach(offer => {
+                const jobCard = createJobCard(offer);
+                jobOffersGrid.appendChild(jobCard);
+            });
+            
+            // Update results count
+            updateResultsCount();
+        }
+        
+        // Update results count
+        function updateResultsCount() {
+            const count = filteredOffers.length;
+            const total = currentOffers.length;
+            
+            // Add or update results count display
+            let resultsCount = document.getElementById('resultsCount');
+            if (!resultsCount) {
+                resultsCount = document.createElement('div');
+                resultsCount.id = 'resultsCount';
+                resultsCount.className = 'results-count';
+                jobOffersGrid.parentNode.insertBefore(resultsCount, jobOffersGrid);
+            }
+            
+            resultsCount.innerHTML = `
+                <span class="results-text">
+                    ${count} offre${count > 1 ? 's' : ''} trouvée${count > 1 ? 's' : ''} sur ${total}
+                </span>
+            `;
+        }
+        
+        // Handle job card clicks
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('job-expand-btn') || e.target.closest('.job-expand-btn')) {
+                const jobId = e.target.closest('.job-expand-btn').getAttribute('data-job-id');
+                showJobDetails(jobId, currentOffers);
+            }
+        });
+        
+        // Load job offers when page loads
+        loadJobOffers();
+    });
+    </script>
+</body>
+</html>
