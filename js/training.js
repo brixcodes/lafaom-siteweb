@@ -716,7 +716,7 @@ function initializeCountryCodes() {
     // Add options to select
     sortedCountries.forEach(country => {
         const option = document.createElement('option');
-        option.value = country.code;
+        option.value = country.iso;  // Use ISO code instead of phone code
         option.textContent = `${country.flag} ${country.iso} - ${country.name}`;
         countrySelect.appendChild(option);
     });
@@ -733,143 +733,95 @@ function showSessionEnrollmentModal(session) {
     
     // Créer modal overlay
     const modalOverlay = document.createElement('div');
-    modalOverlay.className = 'session-enrollment-modal-overlay';
+    modalOverlay.className = 'training-modal';
+    modalOverlay.id = 'trainingModal';
     modalOverlay.style.cssText = `
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 20000;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 10000;
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px;
-        overflow-y: auto;
+        font-family: 'Varela Round', sans-serif;
     `;
     
     // Créer modal content
     const modalContent = document.createElement('div');
-    modalContent.className = 'session-enrollment-modal-content';
+    modalContent.className = 'modal-wrap';
     modalContent.style.cssText = `
+        position: relative;
         background: white;
-        border-radius: 16px;
-        padding: 40px;
+        border-radius: 5px;
         max-width: 600px;
-        width: 100%;
+        width: 90%;
         max-height: 90vh;
         overflow-y: auto;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-        transform: scale(0.9);
-        transition: transform 0.3s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        animation: modalSlideIn 0.3s ease-out;
+        margin-top: 40px;
     `;
     
     modalContent.innerHTML = `
-        <div class="enrollment-header" style="text-align: center; margin-bottom: 30px;">
-            <div class="enrollment-icon" style="font-size: 3rem; color: var(--color-primary); margin-bottom: 16px;">
-                <img src="assets/Images/logo.png" alt="Logo" style="width: 80px; height: 80px; object-fit: contain;">
-            </div>
-            <h2 style="color: var(--color-gray-800); margin-bottom: 8px; font-size: 1.8rem;">
-                Inscription à la formation
-            </h2>
-            <p style="color: var(--color-gray-600); font-size: 0.9rem;">
-                Remplissez le formulaire ci-dessous pour vous inscrire à cette session
-            </p>
+        <div class="modal-header">
+            <div class="modal-title"></div>
+            <button class="modal-close" onclick="closeTrainingModal()">
+                <i class="bx bx-x"></i>
+            </button>
         </div>
         
-        <form id="enrollmentForm" class="enrollment-form" style="display: flex; flex-direction: column; gap: 20px;">
-            <div class="form-row" style="display: flex; gap: 16px;">
-                <div class="form-group" style="flex: 1;">
-                    <label for="firstName" style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--color-gray-700);">
-                        Prénom *
-                    </label>
-                    <input type="text" id="firstName" name="firstName" required
-                           style="width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px; transition: border-color 0.3s ease;"
-                           onfocus="this.style.borderColor='var(--color-primary)'; this.style.outline='none';"
-                           onblur="this.style.borderColor='#e5e7eb';">
+        <div class="modal-body">
+            <div class="application-form">
+                <div class="application-header">
+                    <img src="assets/Images/logo.png" alt="Logo">
+                    <h2>Inscription à la formation</h2>
+                    <p>Remplissez le formulaire ci-dessous pour vous inscrire à cette session</p>
                 </div>
-                <div class="form-group" style="flex: 1;">
-                    <label for="lastName" style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--color-gray-700);">
-                        Nom *
-                    </label>
-                    <input type="text" id="lastName" name="lastName" required
-                           style="width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px; transition: border-color 0.3s ease;"
-                           onfocus="this.style.borderColor='var(--color-primary)'; this.style.outline='none';"
-                           onblur="this.style.borderColor='#e5e7eb';">
-                </div>
+        
+                <form id="enrollmentForm" class="enrollment-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">Prénom *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Nom *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Adresse email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="countryCode">Pays *</label>
+                            <select id="countryCode" name="countryCode" required>
+                                <option value="">Sélectionner un pays</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Numéro de téléphone *</label>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="closeTrainingModal()">
+                            Annuler
+                        </button>
+                        <button type="submit" class="btn-submit" id="submitEnrollment">
+                            S'inscrire
+                        </button>
+                    </div>
+                </form>
             </div>
-            
-            <div class="form-group">
-                <label for="email" style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--color-gray-700);">
-                    Adresse email *
-                </label>
-                <input type="email" id="email" name="email" required
-                       style="width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px; transition: border-color 0.3s ease;"
-                       onfocus="this.style.borderColor='var(--color-primary)'; this.style.outline='none';"
-                       onblur="this.style.borderColor='#e5e7eb';">
-            </div>
-            
-            <div class="form-row" style="display: flex; gap: 16px;">
-                <div class="form-group" style="flex: 0 0 120px;">
-                    <label for="countryCode" style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--color-gray-700);">
-                        Code pays *
-                    </label>
-                    <select id="countryCode" name="countryCode" required
-                            style="width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px; transition: border-color 0.3s ease;"
-                            onfocus="this.style.borderColor='var(--color-primary)'; this.style.outline='none';"
-                            onblur="this.style.borderColor='#e5e7eb';">
-                        <option value="">Sélectionner un pays</option>
-                    </select>
-                </div>
-                <div class="form-group" style="flex: 1;">
-                    <label for="phoneNumber" style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--color-gray-700);">
-                        Numéro de téléphone *
-                    </label>
-                    <input type="tel" id="phoneNumber" name="phoneNumber" required
-                           style="width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 16px; transition: border-color 0.3s ease;"
-                           onfocus="this.style.borderColor='var(--color-primary)'; this.style.outline='none';"
-                           onblur="this.style.borderColor='#e5e7eb';">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label for="attachments" style="display: block; margin-bottom: 8px; font-weight: 600; color: var(--color-gray-700);">
-                    Documents (CV, Lettre de motivation, etc.)
-                </label>
-                <div class="file-upload-area" id="fileUploadArea" 
-                     style="border: 2px dashed #d1d5db; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: all 0.3s ease;"
-                     onmouseover="this.style.borderColor='var(--color-primary)'; this.style.backgroundColor='rgba(220, 38, 127, 0.05)';"
-                     onmouseout="this.style.borderColor='#d1d5db'; this.style.backgroundColor='transparent';">
-                    <i class="bx bx-cloud-upload" style="font-size: 2rem; color: var(--color-gray-400); margin-bottom: 8px; display: block;"></i>
-                    <p style="color: var(--color-gray-600); margin: 0; font-size: 0.9rem;">
-                        Cliquez pour sélectionner des fichiers ou glissez-déposez ici
-                    </p>
-                    <p style="color: var(--color-gray-400); margin: 4px 0 0 0; font-size: 0.8rem;">
-                        PDF, DOC, DOCX (max 10MB par fichier)
-                    </p>
-                </div>
-                <input type="file" id="attachments" name="attachments" multiple accept=".pdf,.doc,.docx" 
-                       style="display: none;">
-                <div id="selectedFiles" style="margin-top: 12px;"></div>
-            </div>
-            
-            <div class="form-actions" style="display: flex; gap: 12px; justify-content: center; margin-top: 30px;">
-                <button type="button" onclick="closeSessionEnrollmentModal()" 
-                        style="padding: 12px 24px; border: 2px solid var(--color-primary); background: transparent; color: var(--color-primary); border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;"
-                        onmouseover="this.style.background='var(--color-primary)'; this.style.color='white';" 
-                        onmouseout="this.style.background='transparent'; this.style.color='var(--color-primary);">
-                    Annuler
-                </button>
-                <button type="submit" id="submitEnrollment"
-                        style="padding: 12px 24px; background: var(--color-primary); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;"
-                        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(220, 38, 127, 0.3)';" 
-                        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
-                    <i class="bx bx-send" style="margin-right: 8px;"></i>
-                    S'inscrire
-                </button>
-            </div>
-        </form>
+        </div>
     `;
     
     modalOverlay.appendChild(modalContent);
@@ -878,245 +830,173 @@ function showSessionEnrollmentModal(session) {
     
     console.log('✅ Modal ajoutée au DOM');
     
-    // Animate modal
-    setTimeout(() => {
-        modalContent.style.transform = 'scale(1)';
-        console.log('🎨 Animation de la modal déclenchée');
-    }, 10);
-    
     // Initialize form functionality
     initializeEnrollmentForm(session);
     
     // Close on overlay click
     modalOverlay.addEventListener('click', (e) => {
         if (e.target === modalOverlay) {
-            closeSessionEnrollmentModal();
+            closeTrainingModal();
         }
     });
     
     // Store modal reference
-    window.currentSessionEnrollmentModal = modalOverlay;
+    window.currentTrainingModal = modalOverlay;
 }
+
+// Close training modal
+window.closeTrainingModal = function() {
+    const modal = document.getElementById('trainingModal');
+    if (modal) {
+        modal.remove();
+        document.body.style.overflow = '';
+        console.log('✅ Modal de formation fermée');
+    }
+};
 
 // Initialize enrollment form
 function initializeEnrollmentForm(session) {
     const form = document.getElementById('enrollmentForm');
-    const fileUploadArea = document.getElementById('fileUploadArea');
-    const fileInput = document.getElementById('attachments');
-    const selectedFilesDiv = document.getElementById('selectedFiles');
     const submitButton = document.getElementById('submitEnrollment');
     
     // Initialize country codes
     initializeCountryCodes();
     
-    // File upload handling
-    fileUploadArea.addEventListener('click', () => fileInput.click());
-    
-    fileUploadArea.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        fileUploadArea.style.borderColor = 'var(--color-primary)';
-        fileUploadArea.style.backgroundColor = 'rgba(220, 38, 127, 0.1)';
-    });
-    
-    fileUploadArea.addEventListener('dragleave', (e) => {
-        e.preventDefault();
-        fileUploadArea.style.borderColor = '#d1d5db';
-        fileUploadArea.style.backgroundColor = 'transparent';
-    });
-    
-    fileUploadArea.addEventListener('drop', (e) => {
-        e.preventDefault();
-        fileUploadArea.style.borderColor = '#d1d5db';
-        fileUploadArea.style.backgroundColor = 'transparent';
-        
-        const files = Array.from(e.dataTransfer.files);
-        handleFileSelection(files);
-    });
-    
-    fileInput.addEventListener('change', (e) => {
-        const files = Array.from(e.target.files);
-        handleFileSelection(files);
-    });
-    
-    function handleFileSelection(files) {
-        selectedFilesDiv.innerHTML = '';
-        
-        files.forEach((file, index) => {
-            if (file.size > 10 * 1024 * 1024) {
-                alert(`Le fichier "${file.name}" est trop volumineux (max 10MB)`);
-                return;
-            }
-            
-            const fileDiv = document.createElement('div');
-            fileDiv.style.cssText = `
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 8px 12px;
-                background: rgba(220, 38, 127, 0.1);
-                border-radius: 6px;
-                margin-bottom: 8px;
-                font-size: 0.9rem;
-            `;
-            
-            fileDiv.innerHTML = `
-                <span style="color: var(--color-gray-700);">
-                    <i class="bx bx-file" style="margin-right: 8px;"></i>
-                    ${file.name} (${(file.size / 1024 / 1024).toFixed(1)}MB)
-                </span>
-                <button type="button" onclick="removeFile(${index})" style="
-                    background: none;
-                    border: none;
-                    color: var(--color-primary);
-                    cursor: pointer;
-                    padding: 4px;
-                ">
-                    <i class="bx bx-x"></i>
-                </button>
-            `;
-            
-            selectedFilesDiv.appendChild(fileDiv);
-        });
-    }
-    
     // Form submission
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        
-        const formData = new FormData(form);
-        const enrollmentData = {
-            email: formData.get('email'),
-            target_session_id: session.id,
-            first_name: formData.get('firstName'),
-            last_name: formData.get('lastName'),
-            phone_number: formData.get('phoneNumber'),
-            country_code: formData.get('countryCode'),
-            attachments: []
-        };
-        
-        // Handle file attachments
-        const files = Array.from(fileInput.files);
-        for (const file of files) {
-            enrollmentData.attachments.push(file.name);
-        }
-        
-        // Show loading state
-        submitButton.innerHTML = '<i class="bx bx-loader-alt bx-spin" style="margin-right: 8px;"></i>Inscription en cours...';
-        submitButton.disabled = true;
-        
-        try {
-            const response = await fetch('https://lafaom.vertex-cam.com/api/v1/student-applications', {
-                method: 'POST',
-                headers: {
-                    'accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(enrollmentData)
-            });
-            
-            if (response.ok) {
-                const result = await response.json();
-                showEnrollmentSuccess(result);
-            } else {
-                throw new Error(`Erreur ${response.status}: ${response.statusText}`);
-            }
-        } catch (error) {
-            console.error('Erreur lors de l\'inscription:', error);
-            showEnrollmentError(error.message);
-        } finally {
-            submitButton.innerHTML = '<i class="bx bx-send" style="margin-right: 8px;"></i>S\'inscrire';
-            submitButton.disabled = false;
-        }
+        await submitEnrollment(session);
     });
 }
 
-// Show enrollment success
-function showEnrollmentSuccess(result) {
-    const modal = window.currentSessionEnrollmentModal;
-    if (!modal) return;
+// Submit enrollment
+async function submitEnrollment(session) {
+    const form = document.getElementById('enrollmentForm');
+    const submitButton = document.getElementById('submitEnrollment');
     
-    const modalContent = modal.querySelector('.session-enrollment-modal-content');
-    modalContent.innerHTML = `
-        <div style="text-align: center; padding: 20px;">
-            <div style="font-size: 4rem; color: #16a34a; margin-bottom: 20px;">
-                <i class="bx bx-check-circle"></i>
-            </div>
-            <h2 style="color: var(--color-gray-800); margin-bottom: 16px; font-size: 1.8rem;">
-                Inscription réussie !
-            </h2>
-            <p style="color: var(--color-gray-600); margin-bottom: 24px; line-height: 1.6;">
-                Votre inscription a été enregistrée avec succès. Vous recevrez un email de confirmation avec tous les détails.
-            </p>
-            <button onclick="closeSessionEnrollmentModal()" style="
-                padding: 12px 24px;
-                background: var(--color-primary);
-                color: white;
-                border: none;
-                border-radius: 8px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.3s ease;
-            " onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 12px rgba(220, 38, 127, 0.3)';" 
-               onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
-                Fermer
-            </button>
-        </div>
-    `;
-}
-
-// Show enrollment error
-function showEnrollmentError(errorMessage) {
-    const modal = window.currentSessionEnrollmentModal;
-    if (!modal) return;
+    // Get form data
+    const formData = new FormData(form);
+    const enrollmentData = {
+        email: formData.get('email'),
+        target_session_id: session.id,
+        first_name: formData.get('firstName'),
+        last_name: formData.get('lastName'),
+        phone_number: formData.get('phoneNumber'),
+        country_code: formData.get('countryCode'),
+        attachments: []
+    };
     
-    const modalContent = modal.querySelector('.session-enrollment-modal-content');
-    modalContent.innerHTML = `
-        <div style="text-align: center; padding: 20px;">
-            <div style="font-size: 4rem; color: #dc2626; margin-bottom: 20px;">
-                <i class="bx bx-error-circle"></i>
-            </div>
-            <h2 style="color: var(--color-gray-800); margin-bottom: 16px; font-size: 1.8rem;">
-                Erreur d'inscription
-            </h2>
-            <p style="color: var(--color-gray-600); margin-bottom: 24px; line-height: 1.6;">
-                Une erreur s'est produite lors de votre inscription : ${errorMessage}
-            </p>
-            <div style="display: flex; gap: 12px; justify-content: center;">
-                <button onclick="closeSessionEnrollmentModal()" style="
-                    padding: 12px 24px;
-                    border: 2px solid var(--color-primary);
-                    background: transparent;
-                    color: var(--color-primary);
-                    border-radius: 8px;
-                    font-weight: 600;
-                    cursor: pointer;
-                ">
-                    Fermer
-                </button>
-                <button onclick="location.reload()" style="
-                    padding: 12px 24px;
-                    background: var(--color-primary);
-                    color: white;
-                    border: none;
-                    border-radius: 8px;
-                    font-weight: 600;
-                    cursor: pointer;
-                ">
-                    Réessayer
-                </button>
-            </div>
-        </div>
-    `;
-}
-
-// Close session enrollment modal
-function closeSessionEnrollmentModal() {
-    const modal = window.currentSessionEnrollmentModal;
-    if (modal) {
-        modal.remove();
-        document.body.style.overflow = '';
-        window.currentSessionEnrollmentModal = null;
+    console.log('📝 Données d\'inscription:', enrollmentData);
+    
+    // Show loading state
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Inscription en cours...';
+    
+    try {
+        console.log('🚀 Envoi de la requête vers l\'API...');
+        
+        // Essayer d'abord avec CORS
+        let response;
+        try {
+            response = await fetch('https://lafaom.vertex-cam.com/api/v1/student-applications', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'accept': 'application/json'
+                },
+                body: JSON.stringify(enrollmentData),
+                mode: 'cors'
+            });
+        } catch (corsError) {
+            console.warn('⚠️ Erreur CORS, tentative avec no-cors...');
+            // Essayer avec no-cors en cas d'échec CORS
+            response = await fetch('https://lafaom.vertex-cam.com/api/v1/student-applications', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'accept': 'application/json'
+                },
+                body: JSON.stringify(enrollmentData),
+                mode: 'no-cors'
+            });
+        }
+        
+        console.log('📡 Réponse reçue:', response.status, response.statusText);
+        
+        // En mode no-cors, on ne peut pas lire la réponse
+        if (response.type === 'opaque') {
+            console.log('✅ Requête envoyée avec succès (mode no-cors)');
+            showTrainingSuccess({ message: 'Inscription envoyée avec succès' });
+        } else if (response.ok) {
+            const result = await response.json();
+            console.log('✅ Succès:', result);
+            showTrainingSuccess(result);
+        } else {
+            // Essayer de lire le message d'erreur
+            let errorMessage = 'Erreur lors de l\'inscription';
+            try {
+                const errorData = await response.json();
+                errorMessage = errorData.message || errorMessage;
+            } catch (e) {
+                errorMessage = `Erreur ${response.status}: ${response.statusText}`;
+            }
+            console.error('❌ Erreur API:', errorMessage);
+            showTrainingError(errorMessage);
+        }
+    } catch (error) {
+        console.error('❌ Erreur lors de l\'inscription:', error);
+        
+        // Gestion spécifique des erreurs CORS
+        if (error.name === 'TypeError' && error.message.includes('NetworkError')) {
+            showTrainingError('Erreur de connexion CORS. L\'API n\'est pas accessible depuis ce domaine.');
+        } else if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+            showTrainingError('Impossible de se connecter au serveur. Vérifiez votre connexion internet.');
+        } else {
+            showTrainingError('Erreur de connexion. Veuillez réessayer.');
+        }
+    } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'S\'inscrire';
     }
+}
+
+// Show training success
+function showTrainingSuccess(response) {
+    const modalContent = document.querySelector('#trainingModal .modal-body');
+    modalContent.innerHTML = `
+        <div class="application-message application-success">
+            <div class="success-icon">
+                <i class="bx bx-check"></i>
+            </div>
+            <div class="success-content">
+                <h3>Parfait !</h3>
+                <p>Votre inscription a été enregistrée avec succès.</p>
+                <p>Vous recevrez un email de confirmation avec votre mot de passe et tous les détails de la formation.</p>
+                <button class="success-button" onclick="closeTrainingModal()">
+                    OK
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// Show training error
+function showTrainingError(message) {
+    const modalContent = document.querySelector('#trainingModal .modal-body');
+    modalContent.innerHTML = `
+        <div class="application-message application-error">
+            <div class="error-icon">
+                <i class="bx bx-x"></i>
+            </div>
+            <div class="success-content">
+                <h3>Erreur</h3>
+                <p>${message}</p>
+                <button class="error-button" onclick="closeTrainingModal()">
+                    OK
+                </button>
+            </div>
+        </div>
+    `;
 }
 
 

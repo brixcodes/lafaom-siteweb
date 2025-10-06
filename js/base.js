@@ -7,9 +7,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const bgOverlay = document.querySelector(".overlay");
     const Menulink = document.querySelectorAll('.menu-link');
 
+    // Debug: Check if elements are found
+    console.log('Base.js loaded');
+    console.log('Menu element:', navbarMenu);
+    console.log('Burger element:', burgerMenu);
+    console.log('Overlay element:', bgOverlay);
+
     // Initialize hide navbar menu function
     const toggleNavbarMenu = () => {
+        console.log('Toggle menu called');
         if (navbarMenu && burgerMenu && bgOverlay) {
+            console.log('Toggling menu classes');
             navbarMenu.classList.toggle("is-active");
             burgerMenu.classList.toggle("is-active");
             bgOverlay.classList.toggle("is-active");

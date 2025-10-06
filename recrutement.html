@@ -12,6 +12,7 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
@@ -35,7 +36,7 @@
                 </ul>
             </div>
             <span class="overlay"></span>
-            <a href="#" class="btn btn-primary menu-cta">Espace Candidat</a>
+            <a href="login.html" class="btn btn-primary menu-cta">Espace Candidat</a>
         </nav>
     </header>
 
@@ -186,56 +187,80 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-col">
-                    <h4>Institut</h4>
-                    <ul>
-                        <li><a href="about.html">À propos</a></li>
-                        <li><a href="#">Formation AVMJ</a></li>
-                        <li><a href="#">Programme Mao</a></li>
-                        <li><a href="#">Certification</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Formation</h4>
-                    <ul>
-                        <li><a href="#">Candidature</a></li>
-                        <li><a href="#">Programme</a></li>
-                        <li><a href="#">Calendrier</a></li>
-                        <li><a href="#">Certification</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Actualités</h4>
-                    <ul>
-                        <li><a href="actualite.html">Toutes les actualités</a></li>
-                        <li><a href="#">Événements</a></li>
-                        <li><a href="#">Publications</a></li>
-                        <li><a href="#">Médias</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>Contact</h4>
-                    <ul>
-                        <li><a href="#">Nous contacter</a></li>
-                        <li><a href="#">Localisation</a></li>
-                        <li><a href="#">Partenaires</a></li>
-                        <li><a href="#">Mentions légales</a></li>
-                    </ul>
-                </div>
+      <!-- Footer -->
+      <div class="page-wrapper">
+        <div id="waterdrop"></div>
+        <footer class="footer">
+           <div class="container">
+      <div class="row">
+              <div class="footer-col">
+                <h4>Institut</h4>
+                <ul>
+                  <li><a href="about.html">À propos</a></li>
+                  <li><a href="#">Formation AVMJ</a></li>
+                  <li><a href="#">Programme Mao</a></li>
+                  <li><a href="#">Certification</a></li>
+                </ul>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Institut de Formation Lafaom-Mao. Tous droits réservés.</p>
+              <div class="footer-col">
+                <h4>Formation</h4>
+                <ul>
+                  <li><a href="#">Candidature</a></li>
+                  <li><a href="#">Programme</a></li>
+                  <li><a href="#">Calendrier</a></li>
+                  <li><a href="#">Frais de formation</a></li>
+                  <li><a href="#">Bourses</a></li>
+                </ul>
+          </div>
+              <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                  <li><a href="tel:+221123456789">+221 123 456 789</a></li>
+                  <li><a href="#">Ziguinchor, Sénégal</a></li>
+                  <li><a href="#">Dakar, Sénégal</a></li>
+                  <li><a href="#">Nous contacter</a></li>
+                </ul>
+              </div>
+              <div class="footer-col">
+                <h4>Suivez-nous</h4>
+                <div class="social-links">
+                  <a href="#"><i class="fab fa-facebook-f"></i></a>
+                  <a href="#"><i class="fab fa-twitter"></i></a>
+                  <a href="#"><i class="fab fa-instagram"></i></a>
+                  <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+              <div class="footer-copyright">
+                <p>2025 © <a href="#" target="_blank">INSTITUT DE FORMATION LAFAOM-MAO </a></p>
+        </div>
+      </div>
+    </div>
+        </footer>
+    </div>
+    <!-- Application Modal -->
+    <div id="applicationModal" class="application-modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-wrap">
+            <div class="modal-body">
+                <div class="modal-header">
+                    <h2 class="modal-title">Candidature</h2>
+                    <button id="closeApplicationModal" class="modal-close">
+                        <i class="bx bx-x"></i>
+                    </button>
+                </div>
+                <div id="applicationFormContent">
+                    <!-- Le contenu du formulaire sera chargé dynamiquement -->
+                </div>
             </div>
         </div>
-    </footer>
+    </div>
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/country-list-js@2.2.0/dist/country-list.min.js"></script>
     <script src="js/base.js"></script>
     <script src="js/recruitment.js"></script>
     <!-- <script src="js/swiper-init.js"></script> -->
