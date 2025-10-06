@@ -2,8 +2,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log('🚀 Initialisation de la page recrutement');
 
-    // API Configuration
-    const API_BASE_URL = 'https://lafaom.vertex-cam.com/api/v1/job-offers';
+    // API Configuration - Utilise les URLs centralisées
+    const API_BASE_URL = CONFIG.API_BASE_URL + CONFIG.ENDPOINTS.JOB.OFFERS;
 
     // DOM Elements
     const loadingOffers = document.getElementById('loadingOffers');
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('📡 Chargement des offres d\'emploi...');
             showLoading();
 
-            const response = await fetch('https://lafaom.vertex-cam.com/api/v1/job-offers?page=1&page_size=20&order_by=created_at&asc=asc');
+            const response = await fetch(API_URLS.JOB_OFFERS());
             const result = await response.json();
             
             console.log('Résultat API offres:', result);
@@ -521,7 +521,7 @@ window.openApplicationModal = async function(jobId) {
     
     try {
         // Fetch job offer details to get required attachments
-        const response = await fetch(`https://lafaom.vertex-cam.com/api/v1/job-offers/${jobId}`);
+        const response = await fetch(API_URLS.JOB_OFFER_BY_ID(jobId));
         const jobOffer = await response.json();
         
         console.log('Job offer details:', jobOffer);
@@ -911,6 +911,8 @@ window.testAttachmentGeneration = function() {
 
 // Submit application
 window.submitApplication = async function() {
+    console.log('🚀 Début de la soumission de candidature...');
+    
     const form = document.getElementById('applicationForm');
     const formData = new FormData(form);
     
@@ -919,9 +921,12 @@ window.submitApplication = async function() {
     const missingFields = requiredFields.filter(field => !formData.get(field));
     
     if (missingFields.length > 0) {
+        console.log('❌ Champs manquants:', missingFields);
         showApplicationError(`Veuillez remplir tous les champs requis : ${missingFields.join(', ')}`);
         return;
     }
+    
+    console.log('✅ Validation des champs de base réussie');
     
     // Check if we have dynamic attachment fields or the old single attachment field
     const hasDynamicAttachments = document.querySelector('.attachment-upload-area');
@@ -1005,10 +1010,12 @@ window.submitApplication = async function() {
         if (hasDynamicAttachments) {
             // Collect files from dynamic attachment fields
             const attachmentInputs = document.querySelectorAll('input[type="file"][id^="attachment_"]');
-            console.log('Collecting files from dynamic attachments:', attachmentInputs.length);
+            console.log('📎 Collecte des fichiers depuis les champs dynamiques:', attachmentInputs.length);
+            
             attachmentInputs.forEach(input => {
                 if (input.files.length > 0) {
                     const attachmentType = input.id.replace('attachment_', '').toUpperCase();
+                    console.log(`📄 Fichier trouvé: ${input.files[0].name} (type: ${attachmentType})`);
                     filesToUpload.push({
                         file: input.files[0],
                         type: attachmentType
@@ -1017,28 +1024,43 @@ window.submitApplication = async function() {
             });
         } else if (hasOldAttachmentField) {
             // Collect files from old single attachment field
-            console.log('Collecting files from old attachment field');
+            console.log('📎 Collecte des fichiers depuis l\'ancien champ unique');
             Array.from(hasOldAttachmentField.files).forEach(file => {
+                console.log(`📄 Fichier trouvé: ${file.name}`);
                 filesToUpload.push({
                     file: file,
                     type: 'CV' // Default type for old field
                 });
             });
         } else {
-            console.log('No attachment fields found - no files to upload');
+            console.log('ℹ️ Aucun champ de pièce jointe trouvé - pas de fichiers à uploader');
         }
         
-        console.log('Files to upload:', filesToUpload.length);
+        console.log(`📊 Total des fichiers à uploader: ${filesToUpload.length}`);
         
         // Upload each file to job-attachments API
         for (const { file, type } of filesToUpload) {
-            console.log(`Uploading file: ${file.name} (type: ${type})`);
+            console.log(`⬆️ Upload du fichier: ${file.name} (type: ${type})`);
+            
+            // Vérifier la taille du fichier (max 10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                throw new Error(`Le fichier ${file.name} est trop volumineux (max 10MB)`);
+            }
+            
+            // Vérifier le type de fichier
+            const allowedTypes = ['.pdf', '.doc', '.docx'];
+            const fileExtension = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
+            if (!allowedTypes.includes(fileExtension)) {
+                throw new Error(`Le fichier ${file.name} n'est pas dans un format accepté (PDF, DOC, DOCX)`);
+            }
             
             const attachmentData = new FormData();
             attachmentData.append('name', type); // Use the attachment type as name
             attachmentData.append('file', file);
             
-            const attachmentResponse = await fetch('https://lafaom.vertex-cam.com/api/v1/job-attachments', {
+            console.log(`🌐 Envoi vers: ${API_URLS.JOB_ATTACHMENTS()}`);
+            
+            const attachmentResponse = await fetch(API_URLS.JOB_ATTACHMENTS(), {
                 method: 'POST',
                 headers: {
                     'accept': 'application/json'
@@ -1049,7 +1071,7 @@ window.submitApplication = async function() {
             
             if (attachmentResponse.ok) {
                 const attachmentResult = await attachmentResponse.json();
-                console.log('Attachment upload result:', attachmentResult);
+                console.log('✅ Upload réussi:', attachmentResult);
                 
                 applicationData.attachments.push({
                     name: attachmentResult.data?.file_path || file.name,
@@ -1057,16 +1079,16 @@ window.submitApplication = async function() {
                     type: type
                 });
             } else {
-                console.error('Upload failed for file:', file.name);
-                console.error('Response status:', attachmentResponse.status);
+                console.error('❌ Échec de l\'upload pour le fichier:', file.name);
+                console.error('📊 Statut de réponse:', attachmentResponse.status);
                 
                 let errorMessage = 'Erreur inconnue';
                 try {
                     const errorResult = await attachmentResponse.json();
-                    console.error('Error result:', errorResult);
+                    console.error('📋 Détails de l\'erreur:', errorResult);
                     errorMessage = errorResult.message || errorResult.error || 'Erreur de validation';
                 } catch (e) {
-                    console.error('Could not parse error response:', e);
+                    console.error('⚠️ Impossible de parser la réponse d\'erreur:', e);
                     errorMessage = `Erreur HTTP ${attachmentResponse.status}: ${attachmentResponse.statusText}`;
                 }
                 
@@ -1082,9 +1104,9 @@ window.submitApplication = async function() {
     }
     
     try {
-        console.log('Sending application data:', applicationData);
+        console.log('📤 Envoi des données de candidature:', applicationData);
         
-        const response = await fetch('https://lafaom.vertex-cam.com/api/v1/job-applications', {
+        const response = await fetch(API_URLS.JOB_APPLICATIONS(), {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -1094,22 +1116,27 @@ window.submitApplication = async function() {
         });
         
         const result = await response.json();
+        console.log('📋 Réponse de l\'API:', result);
         
         if (response.ok) {
-            console.log('Application submitted successfully:', result);
+            console.log('✅ Candidature soumise avec succès:', result);
             showApplicationSuccess(result);
         } else {
+            console.error('❌ Erreur lors de la soumission:', result);
+            
             // Handle specific payment errors
             if (result.message && result.message.includes('MINIMUM_REQUIRED_FIELDS')) {
                 showApplicationError('Erreur de validation : Veuillez vérifier que tous les champs requis sont correctement remplis, notamment le pays sélectionné.');
             } else if (result.message && result.message.includes('customer_country')) {
                 showApplicationError('Erreur de pays : Le code pays sélectionné n\'est pas valide. Veuillez sélectionner un autre pays.');
+            } else if (result.message && result.message.includes('payment')) {
+                showApplicationError('Erreur de paiement : ' + result.message);
             } else {
                 showApplicationError(result.message || 'Erreur lors de l\'envoi de la candidature');
             }
         }
     } catch (error) {
-        console.error('Erreur API:', error);
+        console.error('❌ Erreur API:', error);
         showApplicationError('Erreur de connexion. Veuillez réessayer.');
     } finally {
         // Restore button state
@@ -1120,39 +1147,45 @@ window.submitApplication = async function() {
 
 // Show success message
 window.showApplicationSuccess = function(response) {
+    console.log('🎉 Affichage du message de succès:', response);
+    
     const formContent = document.getElementById('applicationFormContent');
     
     // Check if payment is required
     if (response.data && response.data.payment && response.data.payment.payment_link) {
+        console.log('💳 Paiement requis - redirection vers le paiement');
+        
         // Payment required - show payment message
         formContent.innerHTML = `
             <div class="application-message application-success">
                 <div class="success-icon">
-                    <i class="bx bx-check"></i>
+                    <i class="bx bx-check-circle" style="color: #10b981; font-size: 3rem;"></i>
                 </div>
                 <div class="success-content">
-                    <h3>Votre candidature a été envoyée avec succès.</h3>
+                    <h3 style="color: #10b981; margin-bottom: 16px;">✅ Candidature envoyée avec succès !</h3>
                     
-                    <p>Vous devez maintenant effectuer le paiement pour finaliser votre candidature.</p>
+                    <p style="color: #6b7280; margin-bottom: 24px;">
+                        Votre candidature a été enregistrée. Vous devez maintenant effectuer le paiement pour finaliser votre candidature.
+                    </p>
                     
-                    <div class="payment-info">
-                        <p>
-                            <i class="bx bx-euro"></i>
-                            <span class="amount">${response.data.payment.amount} EUR</span>
-                        </p>
-                        <p>
-                            <i class="bx bx-receipt"></i>
-                            <span class="application-number">${response.data.job_application.application_number}</span>
-                        </p>
+                    <div class="payment-info" style="background: #f3f4f6; padding: 16px; border-radius: 8px; margin-bottom: 24px;">
+                        <div style="display: flex; align-items: center; margin-bottom: 8px;">
+                            <i class="bx bx-euro" style="color: #059669; margin-right: 8px;"></i>
+                            <span style="font-weight: 600; color: #059669;">Montant: ${response.data.payment.amount} EUR</span>
+                        </div>
+                        <div style="display: flex; align-items: center;">
+                            <i class="bx bx-receipt" style="color: #6b7280; margin-right: 8px;"></i>
+                            <span style="color: #6b7280;">N° candidature: ${response.data.job_application.application_number}</span>
+                        </div>
                     </div>
                     
-                    <div class="payment-buttons">
-                        <button class="btn btn-primary" onclick="redirectToPayment('${response.data.payment.payment_link}')">
-                            <i class="bx bx-credit-card"></i>
+                    <div class="payment-buttons" style="display: flex; gap: 12px; justify-content: center;">
+                        <button class="btn btn-primary" onclick="redirectToPayment('${response.data.payment.payment_link}')" style="background: #059669; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                            <i class="bx bx-credit-card" style="margin-right: 8px;"></i>
                             Payer maintenant
                         </button>
-                        <button class="btn btn-secondary" onclick="closeApplicationModal()">
-                            <i class="bx bx-x"></i>
+                        <button class="btn btn-secondary" onclick="closeApplicationModal()" style="background: #6b7280; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer;">
+                            <i class="bx bx-x" style="margin-right: 8px;"></i>
                             Fermer
                         </button>
                     </div>
@@ -1160,17 +1193,23 @@ window.showApplicationSuccess = function(response) {
             </div>
         `;
     } else {
+        console.log('✅ Aucun paiement requis - affichage du message de succès simple');
+        
         // No payment required - show success message
         formContent.innerHTML = `
             <div class="application-message application-success">
                 <div class="success-icon">
-                    <i class="bx bx-check"></i>
+                    <i class="bx bx-check-circle" style="color: #10b981; font-size: 3rem;"></i>
                 </div>
                 <div class="success-content">
-                    <h3>Votre candidature a été envoyée avec succès.</h3>
+                    <h3 style="color: #10b981; margin-bottom: 16px;">✅ Candidature envoyée avec succès !</h3>
                     
-                    <p>Nous vous contacterons dans les plus brefs délais.</p>
-                    <button class="success-button" onclick="closeApplicationModal()">
+                    <p style="color: #6b7280; margin-bottom: 24px;">
+                        Votre candidature a été enregistrée. Nous vous contacterons dans les plus brefs délais.
+                    </p>
+                    
+                    <button class="success-button" onclick="closeApplicationModal()" style="background: #10b981; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                        <i class="bx bx-check" style="margin-right: 8px;"></i>
                         OK
                     </button>
                 </div>
@@ -1181,26 +1220,56 @@ window.showApplicationSuccess = function(response) {
 
 // Redirect to payment
 window.redirectToPayment = function(paymentLink) {
-    console.log('Redirecting to payment:', paymentLink);
-    window.open(paymentLink, '_blank');
-    closeApplicationModal();
+    console.log('💳 Redirection vers le paiement:', paymentLink);
+    
+    // Vérifier que le lien de paiement est valide
+    if (!paymentLink || paymentLink === 'undefined' || paymentLink === 'null') {
+        console.error('❌ Lien de paiement invalide:', paymentLink);
+        showApplicationError('Erreur: Lien de paiement invalide. Veuillez contacter le support.');
+        return;
+    }
+    
+    // Ouvrir le lien de paiement dans un nouvel onglet
+    const paymentWindow = window.open(paymentLink, '_blank', 'noopener,noreferrer');
+    
+    if (!paymentWindow) {
+        console.error('❌ Impossible d\'ouvrir la fenêtre de paiement (popup bloqué)');
+        showApplicationError('Veuillez autoriser les popups pour accéder au paiement, ou cliquez sur le lien suivant: ' + paymentLink);
+        return;
+    }
+    
+    console.log('✅ Fenêtre de paiement ouverte avec succès');
+    
+    // Fermer le modal après un court délai
+    setTimeout(() => {
+        closeApplicationModal();
+    }, 1000);
 }
 
 
 // Show error message
 window.showApplicationError = function(message) {
+    console.error('❌ Affichage du message d\'erreur:', message);
+    
     const formContent = document.getElementById('applicationFormContent');
     formContent.innerHTML = `
         <div class="application-message application-error">
             <div class="error-icon">
-                <i class="bx bx-x"></i>
+                <i class="bx bx-x-circle" style="color: #dc2626; font-size: 3rem;"></i>
             </div>
-            <div class="success-content">
-                <h3>Erreur</h3>
-                <p>${message}</p>
-                <button class="error-button" onclick="closeApplicationModal()">
-                    OK
-                </button>
+            <div class="error-content">
+                <h3 style="color: #dc2626; margin-bottom: 16px;">❌ Erreur</h3>
+                <p style="color: #6b7280; margin-bottom: 24px;">${message}</p>
+                <div style="display: flex; gap: 12px; justify-content: center;">
+                    <button class="error-button" onclick="closeApplicationModal()" style="background: #dc2626; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                        <i class="bx bx-x" style="margin-right: 8px;"></i>
+                        Fermer
+                    </button>
+                    <button class="retry-button" onclick="location.reload()" style="background: #6b7280; color: white; padding: 12px 24px; border: none; border-radius: 6px; cursor: pointer;">
+                        <i class="bx bx-refresh" style="margin-right: 8px;"></i>
+                        Réessayer
+                    </button>
+                </div>
             </div>
         </div>
     `;

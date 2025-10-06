@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
 let allTrainings = [];
 let filteredTrainings = [];
 
-// API Configuration
-const TRAINING_API_URL = 'https://lafaom.vertex-cam.com/api/v1/trainings';
+// API Configuration - Utilise les URLs centralisées
+const TRAINING_API_URL = API_URLS.TRAININGS();
 const API_TIMEOUT = 10000; // 10 seconds
 
 // Load training programs from API
@@ -443,7 +443,7 @@ async function loadTrainingSessions(trainingId) {
         console.log(`📡 Chargement des sessions pour la formation: ${trainingId}`);
         
         const response = await fetch(
-            `https://lafaom.vertex-cam.com/api/v1/training-sessions?page=1&page_size=20&training_id=${trainingId}&order_by=created_at&asc=asc`,
+            API_URLS.TRAINING_SESSIONS({ training_id: trainingId }),
             {
                 headers: { accept: "application/json" }
             }
@@ -490,7 +490,20 @@ function renderTrainingSessions(sessions) {
                     </div>
                     
                     <div class="session-pricing">
-                        <span class="price-label">TARIF ${session.training_fee} ${session.currency}</span>
+                        <div class="pricing-details">
+                            <div class="fee-item">
+                                <span class="fee-label">Frais d'inscription:</span>
+                                <span class="fee-amount">${session.registration_fee} ${session.currency}</span>
+                            </div>
+                            <div class="fee-item">
+                                <span class="fee-label">Frais de formation:</span>
+                                <span class="fee-amount">${session.training_fee} ${session.currency}</span>
+                            </div>
+                            <div class="fee-total">
+                                <span class="total-label">TOTAL:</span>
+                                <span class="total-amount">${session.registration_fee + session.training_fee} ${session.currency}</span>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="session-actions">
@@ -707,19 +720,30 @@ const countryCodes = [
 
 // Initialize country codes dropdown
 function initializeCountryCodes() {
-    const countrySelect = document.getElementById('countryCode');
-    if (!countrySelect) return;
-    
-    // Sort countries by name
-    const sortedCountries = countryCodes.sort((a, b) => a.name.localeCompare(b.name, 'fr'));
-    
-    // Add options to select
-    sortedCountries.forEach(country => {
-        const option = document.createElement('option');
-        option.value = country.iso;  // Use ISO code instead of phone code
-        option.textContent = `${country.flag} ${country.iso} - ${country.name}`;
-        countrySelect.appendChild(option);
-    });
+    // Add a small delay to ensure DOM is ready
+    setTimeout(() => {
+        const countrySelect = document.getElementById('countryCode');
+        if (!countrySelect) {
+            console.error('Country select not found');
+            return;
+        }
+        
+        // Clear existing options
+        countrySelect.innerHTML = '<option value="">Sélectionner un pays</option>';
+        
+        // Sort countries by name
+        const sortedCountries = countryCodes.sort((a, b) => a.name.localeCompare(b.name, 'fr'));
+        
+        // Add options to select
+        sortedCountries.forEach(country => {
+            const option = document.createElement('option');
+            option.value = country.iso;  // Use ISO code instead of phone code
+            option.textContent = `${country.flag} ${country.iso} - ${country.name}`;
+            countrySelect.appendChild(option);
+        });
+        
+        console.log('Country codes initialized with', sortedCountries.length, 'countries');
+    }, 100);
 }
 
 // Find session by ID
@@ -856,8 +880,15 @@ window.closeTrainingModal = function() {
 
 // Initialize enrollment form
 function initializeEnrollmentForm(session) {
+    console.log('Initializing enrollment form for session:', session.id);
+    
     const form = document.getElementById('enrollmentForm');
     const submitButton = document.getElementById('submitEnrollment');
+    
+    if (!form) {
+        console.error('Enrollment form not found');
+        return;
+    }
     
     // Initialize country codes
     initializeCountryCodes();
@@ -879,12 +910,23 @@ async function submitEnrollment(session) {
     const enrollmentData = {
         email: formData.get('email'),
         target_session_id: session.id,
-        first_name: formData.get('firstName'),
-        last_name: formData.get('lastName'),
-        phone_number: formData.get('phoneNumber'),
-        country_code: formData.get('countryCode'),
+        first_name: formData.get('firstName') || null,
+        last_name: formData.get('lastName') || null,
+        phone_number: formData.get('phoneNumber') || null,
+        country_code: formData.get('countryCode') || null,
         attachments: []
     };
+    
+    // Validation des champs obligatoires
+    if (!enrollmentData.email) {
+        showTrainingError('L\'adresse email est obligatoire');
+        return;
+    }
+    
+    if (!enrollmentData.target_session_id) {
+        showTrainingError('L\'ID de la session est manquant');
+        return;
+    }
     
     console.log('📝 Données d\'inscription:', enrollmentData);
     
@@ -895,10 +937,16 @@ async function submitEnrollment(session) {
     try {
         console.log('🚀 Envoi de la requête vers l\'API...');
         
+        // Utiliser l'endpoint correct pour créer une candidature
+        const createApplicationUrl = `${CONFIG.API_BASE_URL}${CONFIG.ENDPOINTS.TRAINING.APPLICATIONS}`;
+        console.log('🔗 URL de création de candidature:', createApplicationUrl);
+        console.log('🔗 Données d\'inscription:', enrollmentData);
+
+        
         // Essayer d'abord avec CORS
         let response;
         try {
-            response = await fetch('https://lafaom.vertex-cam.com/api/v1/student-applications', {
+            response = await fetch(createApplicationUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -910,7 +958,7 @@ async function submitEnrollment(session) {
         } catch (corsError) {
             console.warn('⚠️ Erreur CORS, tentative avec no-cors...');
             // Essayer avec no-cors en cas d'échec CORS
-            response = await fetch('https://lafaom.vertex-cam.com/api/v1/student-applications', {
+            response = await fetch(createApplicationUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -930,18 +978,81 @@ async function submitEnrollment(session) {
         } else if (response.ok) {
             const result = await response.json();
             console.log('✅ Succès:', result);
-            showTrainingSuccess(result);
+
+            console.log('✅ resultat de soumissions de formation :', result);
+            
+            // Vérifier si la candidature a été créée avec succès
+            if (result.success && result.data && result.data.id) {
+                console.log('✅ Candidature créée avec succès:', result.data.id);
+                console.log('👤 ID utilisateur:', result.data.user_id);
+                console.log('💰 Frais d\'inscription:', result.data.registration_fee);
+                console.log('💰 Frais de formation:', result.data.training_fee);
+                
+                // Essayer d'initier le paiement avec l'ID de l'utilisateur
+                try {
+                    const paymentUrl = `${CONFIG.API_BASE_URL}/my-student-applications/${result.data.id}/submit`;
+                    console.log('🔗 URL de paiement:', paymentUrl);
+                    
+                    // Créer un token temporaire ou utiliser l'email comme identifiant
+                    const paymentResponse = await fetch(paymentUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'accept': 'application/json',
+                            // Essayer d'utiliser l'email comme identifiant
+                            'X-User-Email': enrollmentData.email
+                        }
+                    });
+                    
+                    if (paymentResponse.ok) {
+                        const paymentResult = await paymentResponse.json();
+                        console.log('💳 Réponse du paiement:', paymentResult);
+                        
+                        // Rediriger vers le lien de paiement si disponible
+                        if (paymentResult.data && paymentResult.data.payment_link) {
+                            console.log('🔗 Redirection vers:', paymentResult.data.payment_link);
+                            window.location.href = paymentResult.data.payment_link;
+                        } else {
+                            console.log('⚠️ Aucun lien de paiement trouvé');
+                            showTrainingSuccess({ 
+                                message: `Candidature créée avec succès ! Votre numéro de candidature est : ${result.data.application_number}. Vous recevrez un email avec vos identifiants de connexion pour finaliser le paiement.`,
+                                applicationNumber: result.data.application_number
+                            });
+                        }
+                    } else {
+                        console.error('❌ Erreur lors de l\'initiation du paiement:', paymentResponse.status);
+                        const errorText = await paymentResponse.text();
+                        console.error('❌ Détails de l\'erreur:', errorText);
+                        
+                        showTrainingSuccess({ 
+                            message: `Candidature créée avec succès ! Votre numéro de candidature est : ${result.data.application_number}. Vous recevrez un email avec vos identifiants de connexion pour finaliser le paiement.`,
+                            applicationNumber: result.data.application_number
+                        });
+                    }
+                } catch (paymentError) {
+                    console.error('❌ Erreur lors du paiement:', paymentError);
+                    showTrainingSuccess({ 
+                        message: `Candidature créée avec succès ! Votre numéro de candidature est : ${result.data.application_number}. Vous recevrez un email avec vos identifiants de connexion pour finaliser le paiement.`,
+                        applicationNumber: result.data.application_number
+                    });
+                }
+            } else {
+                showTrainingSuccess(result);
+            }
         } else {
             // Essayer de lire le message d'erreur
             let errorMessage = 'Erreur lors de l\'inscription';
+            let errorDetails = '';
             try {
                 const errorData = await response.json();
-                errorMessage = errorData.message || errorMessage;
+                console.error('❌ Détails de l\'erreur:', errorData);
+                errorMessage = errorData.message || errorData.detail?.message || errorMessage;
+                errorDetails = errorData.detail?.error_code || '';
             } catch (e) {
                 errorMessage = `Erreur ${response.status}: ${response.statusText}`;
             }
-            console.error('❌ Erreur API:', errorMessage);
-            showTrainingError(errorMessage);
+            console.error('❌ Erreur API:', errorMessage, errorDetails);
+            showTrainingError(`${errorMessage}${errorDetails ? ' (' + errorDetails + ')' : ''}`);
         }
     } catch (error) {
         console.error('❌ Erreur lors de l\'inscription:', error);
@@ -963,6 +1074,11 @@ async function submitEnrollment(session) {
 // Show training success
 function showTrainingSuccess(response) {
     const modalContent = document.querySelector('#trainingModal .modal-body');
+    
+    // Extraire le message et le numéro de candidature
+    const message = response.message || 'Votre inscription a été enregistrée avec succès.';
+    const applicationNumber = response.applicationNumber || '';
+    
     modalContent.innerHTML = `
         <div class="application-message application-success">
             <div class="success-icon">
@@ -970,8 +1086,9 @@ function showTrainingSuccess(response) {
             </div>
             <div class="success-content">
                 <h3>Parfait !</h3>
-                <p>Votre inscription a été enregistrée avec succès.</p>
-                <p>Vous recevrez un email de confirmation avec votre mot de passe et tous les détails de la formation.</p>
+                <p>${message}</p>
+                ${applicationNumber ? `<p><strong>Numéro de candidature : ${applicationNumber}</strong></p>` : ''}
+                <p>Vous recevrez un email de confirmation avec vos identifiants de connexion pour finaliser le paiement.</p>
                 <button class="success-button" onclick="closeTrainingModal()">
                     OK
                 </button>

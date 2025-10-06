@@ -34,7 +34,11 @@ document.addEventListener('DOMContentLoaded', async function () {
             const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 secondes timeout
 
             const response = await fetch(
-                `https://lafaom.vertex-cam.com/api/v1/blog/posts?page=${page}&page_size=${pageSize}&is_published=true&order_by=created_at&asc=asc`,
+                API_URLS.BLOG_POSTS({ 
+                    page, 
+                    page_size: pageSize, 
+                    is_published: true 
+                }),
                 {
                     headers: { accept: "application/json" },
                     signal: controller.signal
@@ -184,7 +188,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     // API Configuration
-    const API_BASE_URL = 'https://lafaom.vertex-cam.com/api/v1/blog';
+    const API_BASE_URL = CONFIG.API_BASE_URL + CONFIG.ENDPOINTS.BLOG.BASE;
 
     // Load categories from API
     async function loadCategories() {

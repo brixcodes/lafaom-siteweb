@@ -7,7 +7,7 @@ async function loadNews() {
   
     try {
       const response = await fetch(
-        "https://lafaom.vertex-cam.com/api/v1/blog/posts?page=1&page_size=20&is_published=true&order_by=created_at&asc=asc",
+        API_URLS.BLOG_POSTS({ is_published: true }),
         { headers: { accept: "application/json" } }
       );
   
