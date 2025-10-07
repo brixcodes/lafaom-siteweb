@@ -1,0 +1,70 @@
+{
+  "site": {
+    "name": "Institut de Formation Lafaom-Mao",
+    "url": "https://lafaom-mao.org",
+    "description": "Institut de formation spécialisé dans la formation des Auxiliaires de Vie en Univers Judiciaire (AVMJ) au Sénégal",
+    "keywords": [
+      "formation AVMJ",
+      "auxiliaire vie judiciaire",
+      "formation Sénégal",
+      "Ziguinchor",
+      "programme Mao",
+      "formation certifiante",
+      "accompagnement judiciaire",
+      "formation professionnelle",
+      "institut formation",
+      "réseau interafricain",
+      "formation 12 mois",
+      "3 spécialités AVMJ",
+      "accueil écoute accompagnement",
+      "appui services judiciaires",
+      "technicien assistance"
+    ],
+    "location": {
+      "city": "Ziguinchor",
+      "country": "Sénégal",
+      "region": "Ziguinchor"
+    },
+    "contact": {
+      "phone": "+221123456789",
+      "email": "contact@lafaom-mao.org"
+    },
+    "social": {
+      "facebook": "https://www.facebook.com/lafaommao",
+      "twitter": "https://www.twitter.com/lafaommao",
+      "linkedin": "https://www.linkedin.com/company/lafaommao",
+      "instagram": "https://www.instagram.com/lafaommao"
+    }
+  },
+  "seo": {
+    "title_template": "{page_title} | Institut de Formation Lafaom-Mao",
+    "description_length": 160,
+    "keywords_density": 2.5,
+    "internal_linking": true,
+    "breadcrumbs": true,
+    "structured_data": true,
+    "open_graph": true,
+    "twitter_cards": true
+  },
+  "analytics": {
+    "google_analytics": "GA_MEASUREMENT_ID",
+    "google_search_console": "GOOGLE_VERIFICATION_CODE",
+    "bing_webmaster": "BING_VERIFICATION_CODE",
+    "yandex_webmaster": "YANDEX_VERIFICATION_CODE"
+  },
+  "performance": {
+    "lazy_loading": true,
+    "image_optimization": true,
+    "css_minification": true,
+    "js_minification": true,
+    "caching": true
+  },
+  "content": {
+    "h1_optimization": true,
+    "h2_h3_structure": true,
+    "alt_text_images": true,
+    "internal_links": true,
+    "external_links": true,
+    "meta_descriptions": true
+  }
+}
