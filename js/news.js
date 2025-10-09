@@ -117,19 +117,21 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         if (posts.length === 0) {
             console.log('⚠️ Aucun post trouvé');
+            // Enlever display: flex du conteneur des cartes
+            newsContainer.style.display = 'block';
             newsContainer.innerHTML = `
-                <li class="cards_item no-posts">
-                    <div class="news-card">
-                        <div class="card_content">
-                            <h2 class="card_title">Aucune actualité disponible</h2>
-                            <p class="card_text">Aucune actualité n'est disponible pour le moment.</p>
-                        </div>
-                    </div>
-                </li>
+                <div class="no-news-message">
+                    <span class="no-news-icon">📰</span>
+                    <h3>Pas d'actualité disponible</h3>
+                    <p>Aucune actualité n'est disponible pour le moment. Revenez bientôt pour découvrir nos dernières nouvelles.</p>
+                </div>
             `;
             return;
         }
 
+        // Restaurer display: flex quand il y a des actualités
+        newsContainer.style.display = 'flex';
+        
         posts.forEach((post, index) => {
             console.log(`📄 Création carte ${index + 1}:`, post.title);
 
@@ -175,15 +177,14 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 
     function showErrorState() {
+        // Enlever display: flex du conteneur des cartes
+        newsContainer.style.display = 'block';
         newsContainer.innerHTML = `
-            <li class="cards_item error-state">
-                <div class="news-card">
-                    <div class="card_content">
-                        <h2 class="card_title">Erreur de chargement</h2>
-                        <p class="card_text">Impossible de charger les actualités. Veuillez réessayer plus tard.</p>
-                    </div>
-                </div>
-            </li>
+            <div class="no-news-message">
+                <span class="no-news-icon">⚠️</span>
+                <h3>Erreur de chargement</h3>
+                <p>Impossible de charger les actualités. Veuillez réessayer plus tard.</p>
+            </div>
         `;
     }
 

@@ -107,12 +107,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeVideoModal = document.getElementById("closeVideoModal");
     const videoModalOverlay = document.getElementById("videoModalOverlay");
     const videoFrame = document.getElementById("videoFrame");
-    const videoUrl = "https://youtu.be/zEAX0EJkjIg?si=sLhTX49qUtER2Oom";
+    const videoUrl = "assets/videos/video.mp4";
 
     function openVideoModal() {
         if (videoModal) {
             videoModal.classList.add("active");
-            if (videoFrame) videoFrame.src = videoUrl;
+            if (videoFrame) {
+                videoFrame.currentTime = 0; // Remettre la vidéo au début
+                videoFrame.play(); // Lancer la lecture
+            }
             document.body.style.overflow = "hidden";
         }
     }
@@ -120,7 +123,10 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeVideoModalFunc() {
         if (videoModal) {
             videoModal.classList.remove("active");
-            if (videoFrame) videoFrame.src = "";
+            if (videoFrame) {
+                videoFrame.pause(); // Pause la vidéo
+                videoFrame.currentTime = 0; // Remettre au début
+            }
             document.body.style.overflow = "";
         }
     }
@@ -257,4 +263,18 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('❌ Aucun élément .stat-number trouvé pour le déclenchement manuel');
         }
     }, 3000); // Trigger after 3 seconds for testing
+
+    // Animation pour la section Technicien d'assistance
+    const formationText = document.querySelector('.formation-text');
+    if (formationText) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        observer.observe(formationText);
+    }
 });
