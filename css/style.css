@@ -810,7 +810,7 @@ out section */
 
 .about-text h2 {
     color: var(--color-secondary);
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: 2rem;
     font-weight: 700;
     line-height: 1.1;
     margin-bottom: 2rem;
@@ -9662,6 +9662,41 @@ input:disabled + .slider {
     transform: translateY(30px);
     transition: all 0.8s ease;
     padding-right: 2rem;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.presentant-text h1 {
+    flex-shrink: 0;
+    margin-bottom: 1.5rem;
+}
+
+.presentant-text .scrollable-content {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #d14b6b #f8f9fa;
+    padding-right: 0.5rem;
+}
+
+/* Scrollbar personnalisée pour Webkit */
+.presentant-text .scrollable-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.presentant-text .scrollable-content::-webkit-scrollbar-track {
+    background: #f8f9fa;
+    border-radius: 3px;
+}
+
+.presentant-text .scrollable-content::-webkit-scrollbar-thumb {
+    background: #d14b6b;
+    border-radius: 3px;
+}
+
+.presentant-text .scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: #b03d5a;
 }
 
 .presentant-text.visible {
@@ -9765,7 +9800,13 @@ input:disabled + .slider {
 
     .presentant-text {
         padding-right: 0;
+        max-height: 60vh;
         transform: translateY(30px);
+    }
+
+    .presentant-text .scrollable-content {
+        max-height: 50vh;
+        overflow-y: auto;
     }
 
     .presentant-text.visible {
@@ -9837,7 +9878,29 @@ input:disabled + .slider {
 
     .presentant-text p {
         font-size: clamp(0.85rem, 1.6vw, 0.95rem);
-        margin-bottom: 1.25rem;
+    }
+
+    .presentant-text .signature {
+        margin-top: 2rem;
+        padding: 1.5rem;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-left: 4px solid #d14b6b;
+        border-radius: 8px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        text-align: right;
+    }
+
+    .presentant-text .signature strong {
+        color: #d14b6b;
+        font-size: 1.1rem;
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .presentant-text .signature em {
+        color: #6c757d;
+        font-style: italic;
+        font-size: 0.95rem;
     }
 
     .presentant-text p:first-of-type {

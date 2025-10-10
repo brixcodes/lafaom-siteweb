@@ -277,4 +277,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
         observer.observe(formationText);
     }
+
+    // Animation pour la section Appui aux services judiciaires
+    const formationSections = document.querySelectorAll('.formation-section');
+    formationSections.forEach((section, index) => {
+        const formationText = section.querySelector('.formation-text');
+        if (formationText) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            observer.observe(formationText);
+        }
+    });
 });
